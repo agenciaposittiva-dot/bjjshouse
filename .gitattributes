@@ -1,0 +1,4 @@
+*.ics -text
+*.webp binary
+*.png binary
+*.jpg binary

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /obrigado.html
+
+Sitemap: https://agenciaposittiva-dot.github.io/bjjshouse/sitemap.xml

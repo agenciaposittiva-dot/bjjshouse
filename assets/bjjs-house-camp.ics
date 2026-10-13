@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BJJ'S HOUSE//Camp 2026//PT-BR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:camp-2026@bjjshouse
+DTSTAMP:20261013T120000Z
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261214
+SUMMARY:BJJ'S HOUSE · Camp de Jiu-Jitsu
+LOCATION:Condomínio Portobello\, Mangaratiba - RJ
+DESCRIPTION:Camp com Fernando Tererê e Tainan Dalpra. A programação compl
+ eta com horários e o endereço são enviados aos inscritos.
+END:VEVENT
+END:VCALENDAR
