@@ -1,12 +1,12 @@
 """Renderiza o vídeo 'Em Movimento' (vertical 1080x1920) a partir de fotos, vídeo, logo e música."""
 import subprocess, sys, os, math
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps, ImageEnhance, ImageChops
 
 W, H, FPS = 1080, 1920, 30
 A = sys.argv[1]            # pasta de assets (fotos 2-5.jpg, clip.mp4, logo.png, music.mp3)
 OUT = sys.argv[2]
-DATE = sys.argv[3] if len(sys.argv) > 3 else ""
+DATE = sys.argv[3] if len(sys.argv) > 3 and not sys.argv[3].startswith("--") else ""
 MUSIC_OFFSET = 78          # segundo da música onde o vídeo começa (clímax cai na 2ª metade)
 
 FI = "/usr/share/fonts/opentype/inter/"
@@ -20,52 +20,66 @@ def font(p, s): return ImageFont.truetype(p, s)
 def ease(x): x = max(0., min(1., x)); return x * x * (3 - 2 * x)
 def eout(x): x = max(0., min(1., x)); return 1 - (1 - x) ** 3
 
+
 # ---------- tratamento de imagem ----------
+# Tudo em operações nativas do Pillow (rápidas); a cor é tratada uma vez por imagem/frame de origem.
 yy, xx = np.mgrid[0:H, 0:W]
-VIG = (1 - 0.75 * np.clip(((xx - W/2)/(W*0.75))**2 + ((yy - H/2)/(H*0.62))**2, 0, 1))[..., None].astype(np.float32)
+VIG = Image.fromarray((255 * (1 - 0.75 * np.clip(((xx - W/2)/(W*0.75))**2 + ((yy - H/2)/(H*0.62))**2, 0, 1))).astype(np.uint8)).convert("RGB")
 rng = np.random.default_rng(1)
-GRAIN = [rng.normal(0, 7, (H//2, W//2, 1)).astype(np.float32).repeat(2, 0).repeat(2, 1) for _ in range(6)]
+GRAIN = [Image.fromarray(np.clip(128 + rng.normal(0, 5, (H//2, W//2)), 0, 255).astype(np.uint8)).resize((W, H), Image.NEAREST).convert("RGB") for _ in range(6)]
+BLACK = Image.new("RGB", (W, H), tuple(int(c * 0.25) for c in NAVY))
+# degradê escuro na parte de baixo, para o texto em terço inferior ficar legível sem cobrir rostos
+GRAD = Image.fromarray(np.repeat((255 - 175 * np.clip((np.arange(H) / H - 0.5) / 0.4, 0, 1) ** 1.5).astype(np.uint8)[:, None], W, 1)).convert("RGB")
+LOWER = int(H * 0.25)
 
 def grade(im, dark=0.62, sat=0.85):
+    """Tons escuros puxados para o azul-marinho da logo, altas levemente quentes."""
     im = ImageEnhance.Color(im).enhance(sat)
     a = np.asarray(im).astype(np.float32) / 255
     a = a ** 1.15 * dark
     lum = a.mean(2, keepdims=True)
     sh = np.array(NAVY, np.float32) / 255; hi = np.array((1.0, 0.86, 0.80), np.float32)
     a = a * 0.85 + (sh * (1 - lum) * 0.35 + hi * lum * 0.15)
-    return a
+    return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
 
-def cover(im, scale=1.18):
+def cover(im, scale=1.0):
     r = max(W / im.width, H / im.height) * scale
-    return im.resize((int(im.width * r), int(im.height * r)), Image.LANCZOS)
+    return im.resize((max(W, round(im.width * r)), max(H, round(im.height * r))), Image.LANCZOS)
 
 class Photo:
-    def __init__(s, path, **kw):
-        s.base = cover(ImageOps.exif_transpose(Image.open(path)).convert("RGB"))
-        s.kw = kw
-    def frame(s, p, zoom=(1.0, 1.10), pan=(0, 0), dark=0.62, sat=0.85):
-        z = zoom[0] + (zoom[1] - zoom[0]) * ease(p)
-        bw, bh = s.base.size
-        cw, ch = bw / 1.18 / z, bh / 1.18 / z
-        cx = bw / 2 + pan[0] * (p - .5) * (bw - cw) ; cy = bh / 2 + pan[1] * (p - .5) * (bh - ch)
-        im = s.base.resize((W, H), Image.BILINEAR, box=(cx - cw/2, cy - ch/2, cx + cw/2, cy + ch/2))
-        return grade(im, dark, sat)
-
-class Clip:
     def __init__(s, path):
-        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-t", "14", "-i", path, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
-        pr = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0", path], capture_output=True, text=True).stdout.split(",")
-        w, h = int(pr[0]), int(pr[1])
-        s.frames = [Image.frombytes("RGB", (w, h), raw[i:i + w*h*3]) for i in range(0, len(raw), w*h*3)]
-    def frame(s, p, start=0, dark=0.62, **_):
-        f = s.frames[min(len(s.frames) - 1, int((start + p * s.seg) * FPS))]
-        bg = cover(f, 1.0).filter(ImageFilter.GaussianBlur(40))
-        bg = ImageEnhance.Brightness(bg).enhance(0.45).resize((W, H))
-        z = 1.0 + 0.06 * p
-        fw = int(W * 1.25 * z); fh = int(f.height * fw / f.width)
-        fg = f.resize((fw, fh), Image.BICUBIC)
-        bg.paste(fg, ((W - fw)//2, (H - fh)//2))
-        return grade(bg, dark + 0.1, 0.9)
+        s.src = cover(ImageOps.exif_transpose(Image.open(path)).convert("RGB"), 1.18)
+        s.cache = {}
+    def frame(s, p, zoom=(1.0, 1.10), pan=(0, 0), dark=0.62, sat=0.85):
+        key = (dark, sat)
+        if key not in s.cache: s.cache[key] = grade(s.src, dark, sat)
+        base = s.cache[key]
+        z = zoom[0] + (zoom[1] - zoom[0]) * ease(p)
+        bw, bh = base.size
+        cw, ch = bw / 1.18 / z, bh / 1.18 / z
+        cx = bw / 2 + pan[0] * (p - .5) * (bw - cw); cy = bh / 2 + pan[1] * (p - .5) * (bh - ch)
+        return base.resize((W, H), Image.BILINEAR, box=(cx - cw/2, cy - ch/2, cx + cw/2, cy + ch/2))
+
+def load_clip(path, start, dur, dark):
+    """Decodifica só o trecho usado (com a rotação do celular já aplicada) e trata a cor."""
+    import io
+    first = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(start), "-i", path, "-frames:v", "1", "-f", "image2pipe", "-vcodec", "png", "-"], capture_output=True).stdout
+    w, h = Image.open(io.BytesIO(first)).size
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(start), "-t", str(dur + 0.2), "-i", path, "-r", str(FPS), "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
+    return [grade(Image.frombytes("RGB", (w, h), raw[i:i + w*h*3]), dark, 0.9) for i in range(0, len(raw) - w*h*3 + 1, w*h*3)]
+
+def clip_frame(frames, p, n_seg):
+    f = frames[min(len(frames) - 1, int(p * (n_seg - 1)))]
+    z = 1.0 + 0.06 * p
+    if f.height >= f.width:                     # vertical: tela cheia com zoom lento
+        big = cover(f, z) if z > 1.0 else cover(f)
+        x0 = (big.width - W) // 2; y0 = (big.height - H) // 2
+        return big.crop((x0, y0, x0 + W, y0 + H))
+    small = cover(f.resize((f.width // 4, f.height // 4)), 1.0).filter(ImageFilter.GaussianBlur(10))
+    bg = ImageEnhance.Brightness(small.resize((W, H), Image.BILINEAR)).enhance(0.55)
+    fw = int(W * 1.25 * z); fh = int(f.height * fw / f.width)
+    bg.paste(f.resize((fw, fh), Image.BICUBIC), ((W - fw)//2, (H - fh)//2))
+    return bg
 
 # ---------- texto animado (palavra por palavra) ----------
 def layout(lines, fnt, track=0):
@@ -98,14 +112,15 @@ def draw_text(img, spec, t, dur):
                 d.text((cx, y + off + dy), ch, font=fnt, fill=col + (a,)); cx += fnt.getlength(ch) + track
         else:
             d.text((x, y + off + dy), w, font=fnt, fill=col + (a,))
-    glow = layer.filter(ImageFilter.GaussianBlur(18))
+    glow = layer.resize((W // 2, H // 2), Image.BILINEAR).filter(ImageFilter.GaussianBlur(9)).resize((W, H), Image.BILINEAR)
     img.alpha_composite(glow); img.alpha_composite(glow); img.alpha_composite(layer)
 
+
 # ---------- linha do tempo ----------
-P = {i: Photo(f"{A}/{i}.jpg") for i in (2, 3, 4, 5, 6, 7, 8, 9)}
-CLIPS = {}
-for name in ["clip", "clip1", "clip2", "clip3", "clip4", "clip5", "clip6", "clip7", "clip8", "clip9", "clip11", "clip12", "clip13"]:
-    c = Clip(f"{A}/{name}.mp4"); c.dur = len(c.frames) / FPS; CLIPS[name] = c
+_P = {}
+def photo(i):
+    if i not in _P: _P[i] = Photo(f"{A}/{i}.jpg")
+    return _P[i]
 LOGO = Image.open(f"{A}/logo.png").convert("RGBA")
 
 L = lambda s: font(F_LIGHT, s); M = lambda s: font(F_MED, s); B = lambda s: font(F_BLACK, s); S = lambda s: font(F_SERIF, s)
@@ -173,32 +188,30 @@ seg(3.0, "clip3", T(["nós estaremos", "em movimento."], B(88)), start=1.2)
 seg(2.2, "black", T(["Não por nós mesmos."], L(70)))
 seg(2.2, "black", T(["Não pela nossa força."], L(70)))
 seg(2.4, "black", T(["Mas porque…"], S(84)))
-seg(2.4, 2, T(["NELE", "VIVEMOS."], B(150), color=WHITE), zoom=(1.15, 1.3), dark=0.4)
-seg(2.4, 4, T(["NELE NOS", "MOVEMOS."], B(140), color=WHITE), zoom=(1.15, 1.3), dark=0.4)
-seg(3.4, 3, T(["E NELE", "EXISTIMOS."], B(140), color=ROSE), zoom=(1.1, 1.3), dark=0.4)
+seg(2.4, 2, T(["NELE", "VIVEMOS."], B(150), color=WHITE, center=True), zoom=(1.15, 1.3), dark=0.4)
+seg(2.4, 4, T(["NELE NOS", "MOVEMOS."], B(140), color=WHITE, center=True), zoom=(1.15, 1.3), dark=0.4)
+seg(3.4, 3, T(["E NELE", "EXISTIMOS."], B(140), color=ROSE, center=True), zoom=(1.1, 1.3), dark=0.4)
 seg(1.2, "black")
 seg(4.6, "black", T(["EM", "MOVIMENTO"], B(150), track=10))
 seg(5.0, "black", T(["Uma geração.", "Um propósito.", "Uma direção.", "Um Deus."], L(72)))
 seg(9.0, "logo")
 
 def light_leak(img, t, strength):
-    if strength <= 0: return img
-    g = np.zeros((H, W, 3), np.float32)
-    cx = W * (0.5 + 0.6 * math.sin(t * 0.7)); cy = H * (0.3 + 0.3 * math.cos(t * 0.5))
-    r2 = ((xx - cx) / (W * .7)) ** 2 + ((yy - cy) / (H * .5)) ** 2
-    g += np.exp(-r2)[..., None] * (np.array(WINE, np.float32) / 255) * strength
-    return img + g
+    """Brilho vinho que passeia pela tela (calculado em baixa resolução)."""
+    sw, sh = W // 8, H // 8
+    y, x = np.mgrid[0:sh, 0:sw]
+    cx = sw * (0.5 + 0.6 * math.sin(t * 0.7)); cy = sh * (0.3 + 0.3 * math.cos(t * 0.5))
+    g = np.exp(-(((x - cx) / (sw * .7)) ** 2 + ((y - cy) / (sh * .5)) ** 2))[..., None] * np.array(WINE, np.float32) * strength
+    return ImageChops.add(img, Image.fromarray(g.astype(np.uint8)).resize((W, H), Image.BILINEAR))
 
-LEAK = None
-def compose(a, t):
-    a = a * VIG + GRAIN[int(t * FPS) % 6] / 255
-    return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8)).convert("RGBA")
+def finish(img, t):
+    img = ImageChops.multiply(img, VIG)
+    return ImageChops.add(img, GRAIN[int(t * FPS) % 6], 1.0, -128).convert("RGBA")
 
 def logo_frame(p, tl, dur):
-    a = np.zeros((H, W, 3), np.float32)
-    r = np.sqrt(((xx - W/2) / W) ** 2 + ((yy - H/2 + 120) / W) ** 2)
-    a += np.exp(-r * 5)[..., None] * np.array(WINE, np.float32) / 255 * 0.55 * ease(tl / 1.5)
-    img = compose(a, tl)
+    r = np.sqrt(((xx[::4, ::4] - W/2) / W) ** 2 + ((yy[::4, ::4] - H/2 + 160) / W) ** 2)
+    g = np.exp(-r * 5)[..., None] * np.array(WINE, np.float32) * 0.55 * ease(tl / 1.5)
+    img = finish(Image.fromarray(g.astype(np.uint8)).resize((W, H), Image.BILINEAR), tl)
     s = 0.85 + 0.15 * eout(tl / 1.6) + 0.03 * p
     size = int(640 * s)
     lg = LOGO.resize((size, size), Image.LANCZOS)
@@ -214,37 +227,58 @@ def logo_frame(p, tl, dur):
         if q > 0: d.text((W/2, y + (1 - q) * 30), txt, font=f, fill=c + (int(255 * q),), anchor="mm")
     return img
 
-def main():
-    total = sum(s[0] for s in SEG)
-    print(f"duração: {total:.1f}s", flush=True)
+def render_part(a, b, out):
+    starts = np.concatenate([[0], np.cumsum([s[0] for s in SEG])])
     enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-                            "-ss", str(MUSIC_OFFSET), "-i", f"{A}/music.mp3",
-                            "-af", f"afade=t=in:d=3,afade=t=out:st={total-5}:d=5,volume=0.9", "-shortest",
-                            "-c:v", "libx264", "-preset", "slow", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", OUT], stdin=subprocess.PIPE)
-    t0 = 0.0
-    for si, (dur, bg, kw, txt) in enumerate(SEG):
+                            "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-maxrate", "5M", "-bufsize", "10M", "-pix_fmt", "yuv420p", out], stdin=subprocess.PIPE)
+    for si in range(a, b):
+        dur, bg, kw, txt = SEG[si]; kw = dict(kw); t0 = starts[si]
         n = int(round(dur * FPS))
         verse = kw.pop("verse", None)
+        frames = load_clip(f"{A}/{bg}.mp4", kw.get("start", 0), dur, kw.get("dark", 0.62) + 0.1) if str(bg).startswith("clip") else None
         for i in range(n):
             tl = i / FPS; p = i / max(1, n - 1); t = t0 + tl
             if bg == "logo":
                 img = logo_frame(p, tl, dur)
             else:
-                if bg == "black": a = np.zeros((H, W, 3), np.float32) + np.array(NAVY, np.float32) / 255 * 0.25
-                elif str(bg).startswith("clip"): CLIPS[bg].seg = dur; a = CLIPS[bg].frame(p, **kw)
-                else: a = P[bg].frame(p, **kw)
-                # fade de entrada curto (corte suave) e leve light-leak na 2ª metade
-                fin = ease(tl / 0.25) if dur > 1.5 else 1.0
-                a = a * fin
-                if t > 60 and bg != "black": a = light_leak(a, t, 0.18)
-                img = compose(a, t)
-                if txt: draw_text(img, txt, tl, dur)
+                if bg == "black": im = BLACK
+                elif frames is not None: im = clip_frame(frames, p, n)
+                else: im = photo(bg).frame(p, **kw)
+                if dur > 1.5 and tl < 0.25: im = Image.blend(BLACK, im, ease(tl / 0.25))   # corte suave
+                if t > 60 and bg != "black": im = light_leak(im, t, 0.18)
+                lower = txt is not None and bg != "black" and not txt.get("center") and not verse
+                if lower: im = ImageChops.multiply(im, GRAD)
+                img = finish(im, t)
+                if txt: draw_text(img, dict(txt, y=LOWER) if lower else txt, tl, dur)
                 if verse:
                     q = eout((tl - 2.2) / 0.8) * (1 - ease((tl - (dur - 0.45)) / 0.45))
                     ImageDraw.Draw(img).text((W/2, H/2 + 300), verse, font=font(F_MED, 44), fill=ROSE + (int(255 * q),), anchor="mm")
             enc.stdin.write(img.convert("RGB").tobytes())
-        t0 += dur
-        print(f"  {si+1}/{len(SEG)}", end="\r", flush=True)
-    enc.stdin.close(); enc.wait(); print("\nok")
+    enc.stdin.close(); enc.wait()
 
-main()
+def main(workers=4):
+    import tempfile
+    durs = [s[0] for s in SEG]; total = sum(durs)
+    print(f"duração: {total:.1f}s", flush=True)
+    # divide as cenas em blocos de duração parecida e renderiza em paralelo
+    bounds = [0]; acc = 0
+    for i, d in enumerate(durs):
+        acc += d
+        if len(bounds) < workers and acc >= total * len(bounds) / workers: bounds.append(i + 1)
+    bounds.append(len(SEG))
+    tmp = tempfile.mkdtemp()
+    parts = [f"{tmp}/part{k}.mp4" for k in range(len(bounds) - 1)]
+    procs = [subprocess.Popen([sys.executable, __file__, A, OUT, DATE, "--part", str(bounds[k]), str(bounds[k + 1]), parts[k]]) for k in range(len(parts))]
+    for pr in procs:
+        if pr.wait(): sys.exit("falha ao renderizar um bloco")
+    with open(f"{tmp}/list.txt", "w") as f: f.writelines(f"file '{p}'\n" for p in parts)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
+                    "-ss", str(MUSIC_OFFSET), "-i", f"{A}/music.mp3",
+                    "-map", "0:v", "-map", "1:a", "-af", f"afade=t=in:d=3,afade=t=out:st={total-5}:d=5,volume=0.9",
+                    "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-t", str(total), "-movflags", "+faststart", OUT], check=True)
+    print("ok", flush=True)
+
+if "--part" in sys.argv:
+    i = sys.argv.index("--part"); render_part(int(sys.argv[i + 1]), int(sys.argv[i + 2]), sys.argv[i + 3])
+else:
+    main()
