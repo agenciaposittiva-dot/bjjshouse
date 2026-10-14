@@ -503,7 +503,7 @@ blockquote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
 .compare .tr-price td,.compare .tr-price th{font-weight:700;border-bottom:0}
 .compare .tr-price td{font-family:var(--f-display);font-weight:400;font-size:24px}
 
-.trust{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.trust{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .trust li{display:flex;gap:12px;align-items:flex-start;min-width:0;font-size:13.5px;line-height:1.45;color:var(--muted)}
 .trust b{display:block;color:var(--navy);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 .trust .ic{width:24px;height:24px;color:var(--gold-tx);margin-top:1px}
@@ -653,7 +653,6 @@ footer{background:var(--navy);color:var(--paper);padding-block:96px 40px;border-
   .diamond{grid-template-columns:1fr}
   .d-img{min-height:340px;order:-1}
   .benefits{grid-template-columns:1fr 1fr}
-  .trust{grid-template-columns:1fr 1fr;gap:20px}
   .steps{grid-template-columns:1fr 1fr;gap:40px 28px}
   .steps::before,.steps::after{display:none}
   .faq-layout{grid-template-columns:1fr;gap:40px}
