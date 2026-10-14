@@ -195,7 +195,7 @@ section{padding-block:120px;position:relative}
 .hero .tag{font-size:clamp(19px,2vw,26px);margin-top:16px;line-height:1.35;max-width:32ch}
 .shimmer,.gold-grad{background:linear-gradient(100deg,var(--gold) 0%,#f6dc9c 22%,var(--gold) 44%,#b8862f 70%,var(--gold) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradMove 7s linear infinite}
 @keyframes gradMove{from{background-position:0% 0}to{background-position:-220% 0}}
-.hero .sub{font-weight:500;font-size:clamp(17px,1.7vw,20px);line-height:1.55;margin-top:18px;max-width:40ch}
+.hero .sub{font-weight:500;font-size:clamp(17px,1.7vw,20px);line-height:1.55;margin-top:18px;max-width:none}
 .hero .sub strong{color:var(--gold-lt);font-weight:600}
 .nobr{white-space:nowrap}
 .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
