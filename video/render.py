@@ -53,7 +53,7 @@ class Photo:
 
 class Clip:
     def __init__(s, path):
-        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", path, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-t", "14", "-i", path, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
         pr = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0", path], capture_output=True, text=True).stdout.split(",")
         w, h = int(pr[0]), int(pr[1])
         s.frames = [Image.frombytes("RGB", (w, h), raw[i:i + w*h*3]) for i in range(0, len(raw), w*h*3)]
@@ -104,7 +104,7 @@ def draw_text(img, spec, t, dur):
 # ---------- linha do tempo ----------
 P = {i: Photo(f"{A}/{i}.jpg") for i in (2, 3, 4, 5)}
 CLIPS = {}
-for name in ["clip", "clip1", "clip2", "clip3", "clip4", "clip5"]:
+for name in ["clip", "clip1", "clip2", "clip3", "clip4", "clip5", "clip6", "clip7", "clip8", "clip9", "clip11", "clip12", "clip13"]:
     c = Clip(f"{A}/{name}.mp4"); c.dur = len(c.frames) / FPS; CLIPS[name] = c
 LOGO = Image.open(f"{A}/logo.png").convert("RGBA")
 
@@ -117,9 +117,9 @@ def seg(d, bg, txt=None, **kw): SEG.append((d, bg, kw, txt))
 
 # INÍCIO — lento
 seg(4.5, 5, T(["Existe uma geração", "que não nasceu", "para ficar parada."]), zoom=(1.0, 1.12), pan=(0.3, 0.2), dark=0.45)
-seg(3.0, 5, T(["Uma geração que", "carrega sonhos."]), zoom=(1.12, 1.2), pan=(-0.2, 0), dark=0.45)
+seg(3.0, "clip11", T(["Uma geração que", "carrega sonhos."]), start=0.3, dark=0.4)
 seg(2.4, 3, T(["Que enfrenta lutas."]), zoom=(1.05, 1.12), dark=0.4)
-seg(2.4, 3, T(["Que tem perguntas."]), zoom=(1.12, 1.18), dark=0.4)
+seg(2.4, "clip11", T(["Que tem perguntas."]), start=4.5, dark=0.35)
 seg(3.4, "black", T(["Que às vezes até", "pensa em desistir…"], S(76), color=(200, 190, 190)))
 seg(3.0, 3, T(["Mas que decidiu", "continuar."], M(84)), zoom=(1.0, 1.08), dark=0.6)
 # CORTES
@@ -130,14 +130,14 @@ seg(3.8, 4, T(["Deus diz:", "“Eu posso usar", "você agora.”"], M(86)), zoom
 # MÚSICA CRESCE
 seg(2.6, "clip4", T(["Nós somos jovens."], M(84)), start=0.6)
 seg(3.2, "clip5", T(["Mas não somos", "apenas espectadores."]), start=0.3)
-seg(3.4, 2, T(["Somos parte daquilo", "que Deus está fazendo."]), zoom=(1.0, 1.08), pan=(0.5, 0))
-seg(1.7, 2, T(["Somos mãos", "que servem."], M(90)), zoom=(1.15, 1.25), pan=(-0.5, -0.3))
+seg(3.4, "clip9", T(["Somos parte daquilo", "que Deus está fazendo."]), start=1.0)
+seg(1.7, "clip12", T(["Somos mãos", "que servem."], M(90)), start=0.5)
 seg(1.7, 3, T(["Pés que", "caminham."], M(90)), zoom=(1.1, 1.2), pan=(0, 0.5))
-seg(1.7, "clip1", T(["Vozes que", "adoram."], M(90)), start=2.0)
-seg(1.7, "clip", T(["Corações que", "queimam."], M(90)), start=5.5)
+seg(1.7, "clip7", T(["Vozes que", "adoram."], M(90)), start=3.0)
+seg(1.7, "clip6", T(["Corações que", "queimam."], M(90)), start=0.5)
 seg(1.6, 5, T(["Uma geração que ora."], M(74)), zoom=(1.2, 1.3), dark=0.55)
 seg(1.4, 2, T(["Que acredita."], M(90)), zoom=(1.1, 1.2), pan=(0.5, 0))
-seg(1.4, 4, T(["Que se levanta."], M(90)), zoom=(1.2, 1.3))
+seg(1.4, "clip8", T(["Que se levanta."], M(90)), start=2.0)
 seg(1.6, 3, T(["Que continua."], M(90)), zoom=(1.0, 1.1))
 # DIFICULDADES
 seg(4.0, "black", T(["Movimento não significa", "ausência de dificuldades."], L(62)))
@@ -156,12 +156,12 @@ seg(2.0, "black", T(["É nele que nos movemos."], M(66)))
 seg(3.2, "black", T(["É nele que encontramos", "nosso propósito."], M(66), color=ROSE))
 # MÚSICA SOBE
 seg(2.0, 2, T(["Por isso, não vamos parar."], B(64)), zoom=(1.0, 1.12), pan=(0.6, 0))
-seg(1.8, 4, T(["Não vamos retroceder."], B(66)), zoom=(1.1, 1.2))
-seg(2.8, "clip", T(["Não vamos deixar que", "palavras nos definam."], M(66)), start=4.0)
+seg(1.8, "clip12", T(["Não vamos retroceder."], B(66)), start=6.0)
+seg(2.8, "clip1", T(["Não vamos deixar que", "palavras nos definam."], M(66)), start=1.0)
 seg(3.0, 3, T(["Não vamos permitir que", "o medo determine", "o nosso futuro."], M(66)), zoom=(1.0, 1.1))
 seg(2.4, 5, T(["Nós fomos chamados", "para avançar."], B(76)), zoom=(1.1, 1.25), dark=0.55)
 seg(1.4, 2, T(["Chamados para", "servir."], B(96)), zoom=(1.2, 1.3), pan=(-0.6, 0))
-seg(1.4, 4, T(["Chamados para", "adorar."], B(96)), zoom=(1.2, 1.3))
+seg(1.4, "clip13", T(["Chamados para", "adorar."], B(96)), start=0.5)
 seg(2.2, "clip", T(["Chamados para fazer", "a diferença."], B(74)), start=6.0)
 # CORTES RÁPIDOS
 seg(1.9, "clip2", T(["Esta é a nossa geração."], B(66)), start=3.2)
