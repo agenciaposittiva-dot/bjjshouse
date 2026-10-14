@@ -180,6 +180,11 @@ section{padding-block:120px;position:relative}
   linear-gradient(180deg,rgba(14,21,38,.55) 0%,rgba(14,21,38,0) 22%,rgba(14,21,38,0) 58%,#0e1526 100%),
   linear-gradient(90deg,rgba(14,21,38,.95) 0%,rgba(14,21,38,.78) 40%,rgba(14,21,38,.2) 100%)}
 .particles{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* os dois mestres, recortados, à direita do topo */
+.hero-masters{position:absolute;z-index:0;right:2.5vw;bottom:0;width:min(42vw,calc((100vh - 150px) * .859));pointer-events:none}
+.hero-masters::before{content:"";position:absolute;inset:6% -14% 0;z-index:-1;background:radial-gradient(48% 46% at 50% 58%,rgba(14,21,38,.78),rgba(14,21,38,0) 100%),radial-gradient(36% 30% at 50% 34%,rgba(204,157,64,.22),rgba(204,157,64,0) 100%)}
+.hero-masters img{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 40px rgba(0,0,0,.5));-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 99%);mask-image:linear-gradient(180deg,#000 70%,transparent 99%)}
+.hero .scroll-cue{display:none}
 .hero-grid{width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:56px;align-items:end;padding-top:calc(var(--annc-h) + 76px + 56px);padding-bottom:56px;will-change:transform,opacity}
 .hero-text{display:flex;flex-direction:column;min-width:0}
 .hero-date{font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
@@ -644,6 +649,7 @@ footer{background:var(--navy);color:var(--paper);padding-block:96px 40px;border-
   .menu-cta{display:inline-flex;margin-top:20px}
   .top.menu-open{background:var(--ink)}
   .hero{justify-content:flex-end}
+  .hero-masters{display:none}
   .hero-grid{grid-template-columns:1fr;gap:40px;padding-top:calc(var(--annc-h) + 130px);padding-bottom:60px}
   .hero-card-wrap{max-width:520px}
   .hero-bg{top:-40px;bottom:auto;height:calc(82vh + 40px);height:calc(82svh + 40px);-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent);mask-image:linear-gradient(180deg,#000 50%,transparent)}
@@ -748,9 +754,20 @@ footer{background:var(--navy);color:var(--paper);padding-block:96px 40px;border-
   .lb-prev{left:calc(50% - 62px)}
   .lb-next{right:calc(50% - 62px)}
 }
+@media (min-width:761px) and (max-width:1000px) and (orientation:portrait){
+  .hero-masters{display:block;left:0;right:0;margin-inline:auto;bottom:auto;top:calc(var(--annc-h) + 96px);width:min(62vw,calc((100vh - 600px) * .859))}
+}
+/* celular: atletas na frente da foto da casa, no alto da tela */
+@media (max-width:760px){
+  .hero-bg{height:100vw}
+  .hero-grid{padding-top:max(calc(var(--annc-h) + 130px),calc(100vw - 40px))}
+  .hero-masters{display:block;left:0;right:0;margin-inline:auto;bottom:auto;top:calc(var(--annc-h) + 62px);width:min(64vw,300px)}
+  .hero-masters img{-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 98%);mask-image:linear-gradient(180deg,#000 62%,transparent 98%)}
+}
 /* celulares de tela baixa (ex.: iPhone SE): foto mais curta para o botão principal caber na primeira tela */
 @media (max-width:760px) and (max-height:720px){
   .hero-bg{height:60vw}
+  .hero-masters{display:none}
   .hero-grid{padding-top:max(calc(var(--annc-h) + 110px),calc(60vw - 52px))}
 }
 @media (max-width:520px){

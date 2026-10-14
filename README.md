@@ -25,7 +25,8 @@ robots.txt / sitemap.xml   SEO
 ## Seções da página
 
 1. **Topo** com faixa de anúncio e menu (com menu mobile)
-2. **Hero** com título, chamada e o botão "Conhecer a experiência"
+2. **Hero** com título, chamada, o botão "Conhecer a experiência" e a foto recortada dos dois mestres
+   (`assets/img/mestres-hero.webp`, com fundo transparente) sobre a foto da casa
 3. **A experiência**
 4. **Os mestres** (autoridade): Fernando Tererê e Tainan Dalpra
 5. **A convivência**
