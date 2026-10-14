@@ -98,11 +98,13 @@ cada um com uma mensagem pronta:
 | Fale conosco / botão verde flutuante | `mensagemWhatsapp` do `config.js` |
 
 Para mudar uma mensagem, edite o atributo `data-wa-msg` do botão no `index.html`
-(as dos planos ficam em `assets/js/main.js`). Os itens do menu, as fotos da galeria e os
-controles (abrir menu, ampliar foto, perguntas) continuam funcionando normalmente.
+(as dos planos ficam em `assets/js/main.js`). Continuam funcionando normalmente, de propósito:
+os itens do menu, as fotos da galeria, os controles (abrir menu, ampliar foto, perguntas,
+comparar planos, voltar ao topo) e o botão **Abrir no Google Maps** do rodapé (é o "como chegar").
 
 **Se um dia quiser usar links de pagamento**, mude para `botoesParaWhatsapp: false` e preencha `checkout`:
-os botões de plano abrem o checkout e os demais rolam até a seção de ingressos. Os parâmetros de
+os botões de plano abrem o checkout e os demais voltam a rolar até a seção indicada
+(ingressos ou, no caso de "Conhecer a experiência", a seção da experiência). Os parâmetros de
 campanha da URL (`utm_source`, `utm_campaign`, `fbclid`, `gclid`, `src`, `sck`...) são repassados
 automaticamente para o link de checkout.
 
