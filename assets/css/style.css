@@ -331,6 +331,7 @@ section{padding-block:120px;position:relative}
 .mstats small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.78;line-height:1.45;margin-top:8px}
 .closing{max-width:860px;margin:80px auto 0;text-align:center;font-size:17px;opacity:.88}
 .closing strong{color:var(--gold-lt)}
+.closing+.closing{margin-top:18px}
 
 /* ---------- 03 convivência ---------- */
 .conv{display:grid;grid-template-columns:.9fr 1.1fr;gap:88px;align-items:center}
