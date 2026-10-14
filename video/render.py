@@ -102,7 +102,7 @@ def draw_text(img, spec, t, dur):
     img.alpha_composite(glow); img.alpha_composite(glow); img.alpha_composite(layer)
 
 # ---------- linha do tempo ----------
-P = {i: Photo(f"{A}/{i}.jpg") for i in (2, 3, 4, 5)}
+P = {i: Photo(f"{A}/{i}.jpg") for i in (2, 3, 4, 5, 6, 7, 8, 9)}
 CLIPS = {}
 for name in ["clip", "clip1", "clip2", "clip3", "clip4", "clip5", "clip6", "clip7", "clip8", "clip9", "clip11", "clip12", "clip13"]:
     c = Clip(f"{A}/{name}.mp4"); c.dur = len(c.frames) / FPS; CLIPS[name] = c
@@ -135,10 +135,10 @@ seg(1.7, "clip12", T(["Somos mãos", "que servem."], M(90)), start=0.5)
 seg(1.7, 3, T(["Pés que", "caminham."], M(90)), zoom=(1.1, 1.2), pan=(0, 0.5))
 seg(1.7, "clip7", T(["Vozes que", "adoram."], M(90)), start=3.0)
 seg(1.7, "clip6", T(["Corações que", "queimam."], M(90)), start=0.5)
-seg(1.6, 5, T(["Uma geração que ora."], M(74)), zoom=(1.2, 1.3), dark=0.55)
-seg(1.4, 2, T(["Que acredita."], M(90)), zoom=(1.1, 1.2), pan=(0.5, 0))
+seg(1.6, 8, T(["Uma geração que ora."], M(74)), zoom=(1.0, 1.1), dark=0.6)
+seg(1.4, 7, T(["Que acredita."], M(90)), zoom=(1.05, 1.15))
 seg(1.4, "clip8", T(["Que se levanta."], M(90)), start=2.0)
-seg(1.6, 3, T(["Que continua."], M(90)), zoom=(1.0, 1.1))
+seg(1.6, 6, T(["Que continua."], M(90)), zoom=(1.0, 1.1))
 # DIFICULDADES
 seg(4.0, "black", T(["Movimento não significa", "ausência de dificuldades."], L(62)))
 seg(4.4, 3, T(["Significa não permitir", "que as dificuldades", "nos façam parar."]), zoom=(1.0, 1.08), dark=0.42, sat=0.3)
@@ -148,7 +148,7 @@ seg(1.8, 5, T(["Haverá portas fechadas."], L(66)), zoom=(1.2, 1.25), dark=0.32,
 seg(3.6, "black", T(["Haverá momentos em que", "não vamos entender", "o caminho."], L(62)))
 seg(3.6, "clip", T(["Mas ainda assim…", "vamos continuar", "caminhando."], M(78)), start=1.0)
 seg(3.8, 2, T(["O nosso movimento", "não depende", "das circunstâncias."]), zoom=(1.0, 1.1))
-seg(3.4, 4, T(["Depende de quem", "nos sustenta."], M(86)), zoom=(1.0, 1.12), dark=0.58)
+seg(3.4, 9, T(["Depende de quem", "nos sustenta."], M(86)), zoom=(1.0, 1.12), dark=0.6)
 # PAUSA — versículo
 seg(6.0, 3, T(["“Porque nele vivemos,", "e nos movemos,", "e existimos.”"], S(80), color=WHITE), zoom=(1.0, 1.06), dark=0.35, verse="ATOS 17:28")
 seg(2.0, "black", T(["É nele que vivemos."], M(72)))
@@ -167,7 +167,7 @@ seg(2.2, "clip", T(["Chamados para fazer", "a diferença."], B(74)), start=6.0)
 seg(1.9, "clip2", T(["Esta é a nossa geração."], B(66)), start=3.2)
 seg(1.7, "clip4", T(["Esta é a nossa vez."], B(74)), start=1.8)
 seg(2.0, "clip5", T(["Este é o nosso chamado."], B(64)), start=1.6)
-seg(3.6, 5, T(["E enquanto houver um", "propósito de Deus", "diante de nós…"]), zoom=(1.0, 1.1), dark=0.5)
+seg(3.6, 8, T(["E enquanto houver um", "propósito de Deus", "diante de nós…"]), zoom=(1.0, 1.1), dark=0.5)
 seg(3.0, "clip3", T(["nós estaremos", "em movimento."], B(88)), start=1.2)
 # PAUSA
 seg(2.2, "black", T(["Não por nós mesmos."], L(70)))
