@@ -162,6 +162,9 @@ Isso garante que a imagem de compartilhamento apareça corretamente no WhatsApp 
 - **Textos e preços**: estão direto no `index.html`, organizados por seção
   (procure pelos comentários `<!-- ===== NOME DA SEÇÃO ===== -->`).
 - **Cores**: no topo de `assets/css/style.css` (`--navy`, `--gold`, `--cream`...).
+- **Depois de editar CSS ou JS**: troque o número `?v=...` nos links de `style.css`, `config.js` e `main.js`
+  em `index.html` e `obrigado.html` (ex.: `?v=20261014-2`). Assim os visitantes recebem a versão nova na hora,
+  sem ficar com a antiga guardada no navegador.
 
 ## Ver localmente
 
