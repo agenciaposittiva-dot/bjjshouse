@@ -43,7 +43,8 @@ robots.txt / sitemap.xml   SEO
 
 ### Efeitos visuais
 
-- **Intro animada** com o logo (só na primeira visita da sessão) e entrada do hero letra por letra
+- **Intro curta** com o logo (menos de 1 s, só na primeira visita da sessão e nunca para quem chega por anúncio,
+  ou seja, links com `utm_...`, `fbclid` ou `gclid`) e entrada do hero letra por letra
 - **Parallax** no fundo do hero, nas fotos e nos números gigantes decorativos; leve movimento com o mouse
 - **Partículas douradas** no hero e no CTA final, textura de granulação nas seções escuras
 - **Faixas em movimento** que aceleram e invertem de direção conforme a rolagem
@@ -91,7 +92,7 @@ cada um com uma mensagem pronta:
 |---|---|
 | Garantir minha vaga (topo, hero, menu, CTA final, barra do celular) | *Olá! Quero garantir minha vaga no Camp da BJJ'S HOUSE (10 a 13/12). Pode me passar as opções?* |
 | Conhecer a experiência | *Olá! Quero conhecer melhor a experiência da BJJ'S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra.* |
-| Ingressos a partir de R$ 500 | *Olá! Quero saber sobre os ingressos do Camp da BJJ'S HOUSE (10 a 13/12).* |
+| Camp a partir de R$ 1.200 (cartão do topo) | *Olá! Quero saber sobre os ingressos do Camp da BJJ'S HOUSE (10 a 13/12).* |
 | Quero fazer parte | *Olá! Quero fazer parte da BJJ'S HOUSE (10 a 13/12). Como faço para garantir minha vaga?* |
 | Quero viver isso (galeria da casa) | *Olá! Vi as fotos da casa e quero viver essa experiência na BJJ'S HOUSE (10 a 13/12).* |
 | Botões de cada plano (Diamond, Gold, Silver, sexta, sábado, domingo, Guest) | *Olá! Quero garantir minha vaga no plano [nome do plano] do Camp BJJ'S HOUSE (10 a 13/12).* |
@@ -100,7 +101,8 @@ cada um com uma mensagem pronta:
 Para mudar uma mensagem, edite o atributo `data-wa-msg` do botão no `index.html`
 (as dos planos ficam em `assets/js/main.js`). Continuam funcionando normalmente, de propósito:
 os itens do menu, as fotos da galeria, os controles (abrir menu, ampliar foto, perguntas,
-comparar planos, voltar ao topo) e o botão **Abrir no Google Maps** do rodapé (é o "como chegar").
+comparar planos, voltar ao topo), o preço da barra fixa do celular ("Camp a partir de R$ 1.200", que leva
+aos valores) e o botão **Abrir no Google Maps** do rodapé (é o "como chegar").
 
 **Se um dia quiser usar links de pagamento**, mude para `botoesParaWhatsapp: false` e preencha `checkout`:
 os botões de plano abrem o checkout e os demais voltam a rolar até a seção indicada
@@ -153,7 +155,9 @@ Isso garante que a imagem de compartilhamento apareça corretamente no WhatsApp 
 ## Como trocar fotos e textos
 
 - **Fotos**: substitua os arquivos em `assets/img/` mantendo o mesmo nome
-  (formato `.webp` recomendado, até ~300 KB cada).
+  (formato `.webp` recomendado, até ~300 KB cada). A casa: `hero-casa.webp` (topo e galeria) e
+  `casa-1` a `casa-5.webp` (galeria). O Diamond usa uma montagem com as fotos dos mestres:
+  `diamond.webp` (um acima do outro, no computador) e `diamond-m.webp` (lado a lado, no celular e tablet).
 - **Textos e preços**: estão direto no `index.html`, organizados por seção
   (procure pelos comentários `<!-- ===== NOME DA SEÇÃO ===== -->`).
 - **Cores**: no topo de `assets/css/style.css` (`--navy`, `--gold`, `--cream`...).

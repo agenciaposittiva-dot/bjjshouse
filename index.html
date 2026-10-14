@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
 <link rel="preload" as="image" href="assets/img/hero-casa.webp" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>(function(h){h.classList.add("js");try{if(sessionStorage.getItem("bjj-intro"))h.classList.add("no-intro")}catch(e){}try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)h.classList.add("rm","no-intro")}catch(e){}})(document.documentElement)</script>
+<script>(function(h){h.classList.add("js");if(/[?&](utm_[a-z]+|fbclid|gclid|gbraid|wbraid|ttclid)=/.test(location.search))h.classList.add("no-intro");try{if(sessionStorage.getItem("bjj-intro"))h.classList.add("no-intro")}catch(e){}try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)h.classList.add("rm","no-intro")}catch(e){}})(document.documentElement)</script>
 <script src="assets/js/config.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 
@@ -160,7 +160,7 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
-  <div class="hero-bg" aria-hidden="true"><div class="hero-bg-m"><img src="assets/img/hero-casa.webp" alt="" width="1920" height="1166" fetchpriority="high"></div></div>
+  <div class="hero-bg" aria-hidden="true"><div class="hero-bg-m"><img src="assets/img/hero-casa.webp" alt="" width="1254" height="936" fetchpriority="high"></div></div>
   <div class="hero-shade" aria-hidden="true"></div>
   <canvas class="particles" data-particles aria-hidden="true"></canvas>
 
@@ -171,9 +171,9 @@
         <span class="sr-only">BJJ'S HOUSE · Camp de Jiu-Jitsu com Fernando Tererê e Tainan Dalpra</span>
         <span class="h1-brand" aria-hidden="true"><span class="h1w"><span class="ch" style="--i:0">B</span><span class="ch" style="--i:1">J</span><span class="ch" style="--i:2">J</span><span class="ch" style="--i:3">'</span><span class="ch" style="--i:4">S</span></span> <span class="h1w"><span class="ch" style="--i:5">H</span><span class="ch" style="--i:6">O</span><span class="ch" style="--i:7">U</span><span class="ch" style="--i:8">S</span><span class="ch" style="--i:9">E</span></span></span>
       </h1>
-      <p class="tag serif" data-h style="--d:6"><span class="shimmer">Muito além do tatame.</span></p>
-      <p class="sub" data-h style="--d:7">Um camp de Jiu-Jitsu com <strong>Fernando Tererê</strong> e <strong>Tainan Dalpra</strong> em uma casa de alto padrão na Costa Verde do Rio de Janeiro.</p>
-      <p class="copy" data-h style="--d:8">Aprenda com lendas. Evolua com campeões. Viva o Jiu-Jitsu em outro nível.</p>
+      <p class="hero-what" data-h style="--d:6">Camp de Jiu-Jitsu com <b>Fernando Tererê</b> e <b>Tainan Dalpra</b></p>
+      <p class="tag serif" data-h style="--d:7"><span class="shimmer">Muito além do tatame.</span></p>
+      <p class="sub" data-h style="--d:8">Seminários, treinos, refeições e convivência em uma casa de alto padrão na Costa Verde do Rio de Janeiro.</p>
       <div class="btns" data-h style="--d:9">
         <a class="btn btn-gold btn-lg" href="#ingressos" data-magnetic data-wa-msg="Olá! Quero garantir minha vaga no Camp da BJJ&#39;S HOUSE (10 a 13/12). Pode me passar as opções?"><span>Garantir minha vaga</span><svg class="ic"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-line btn-lg" href="#experiencia" data-magnetic data-wa-msg="Olá! Quero conhecer melhor a experiência da BJJ&#39;S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra."><span>Conhecer a experiência</span></a>
@@ -205,7 +205,7 @@
           <li><svg class="ic"><use href="#i-check"/></svg>Refeições incluídas em todos os planos</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Opções com hospedagem</li>
         </ul>
-        <a class="btn btn-gold btn-block" href="#ingressos" data-wa-msg="Olá! Quero saber sobre os ingressos do Camp da BJJ&#39;S HOUSE (10 a 13/12)."><span>Ingressos a partir de R$ 500</span></a>
+        <a class="btn btn-gold btn-block" href="#ingressos" data-wa-msg="Olá! Quero saber sobre os ingressos do Camp da BJJ&#39;S HOUSE (10 a 13/12)."><span>Camp a partir de R$ 1.200</span></a>
       </aside>
     </div>
   </div>
@@ -238,9 +238,8 @@
         <h2 data-split>Imagine estar frente a frente com <em>dois grandes nomes</em> do Jiu-Jitsu mundial.</h2>
       </div>
       <div class="stack">
-        <p class="lead reveal">Aprender com suas técnicas, observar seus detalhes, aperfeiçoar seus movimentos e trocar experiências com atletas que compartilham a mesma paixão que você.</p>
-        <p class="reveal">Agora, imagine viver tudo isso em uma casa extraordinária na Costa Verde do Rio de Janeiro, cercada pela natureza, com piscina, gastronomia e um ambiente pensado para conectar pessoas que vivem o Jiu-Jitsu dentro e fora do tatame.</p>
-        <p class="reveal"><strong>Essa é a BJJ'S HOUSE:</strong> uma experiência exclusiva que une aprendizado, convivência e a oportunidade de viver o esporte de uma maneira diferente de tudo o que você já experimentou.</p>
+        <p class="lead reveal">Aprender suas técnicas, observar cada detalhe e trocar experiências com atletas que vivem a mesma paixão que você.</p>
+        <p class="reveal">Agora imagine viver tudo isso em uma casa de alto padrão na Costa Verde do Rio de Janeiro, cercada pela natureza, com piscina e gastronomia. <strong>Essa é a BJJ'S HOUSE.</strong></p>
       </div>
     </div>
 
@@ -280,7 +279,7 @@
         </figure>
         <h3 data-split>Fernando Tererê</h3>
         <p class="serif reveal">Uma lenda do Jiu-Jitsu.</p>
-        <p class="reveal">Faixa-preta e um dos nomes históricos do esporte, Fernando Tererê construiu uma trajetória marcante no Jiu-Jitsu brasileiro e internacional. Estar com um atleta dessa dimensão é uma oportunidade de se aproximar de sua experiência, conhecer sua visão de luta e ampliar seu repertório técnico.</p>
+        <p class="reveal">Faixa-preta e um dos nomes históricos do esporte, Fernando Tererê construiu uma trajetória marcante no Jiu-Jitsu brasileiro e internacional. Uma chance de conhecer de perto sua visão de luta e ampliar seu repertório técnico.</p>
         <ul class="mstats reveal">
           <li><b><span data-count="2">2</span>×</b><small>Campeão mundial faixa-preta</small></li>
           <li><b><span data-count="4">4</span></b><small>Faixas com título mundial</small></li>
@@ -302,7 +301,7 @@
         </ul>
       </article>
     </div>
-    <p class="closing reveal">Ter a oportunidade de aprender com esses dois mestres, cada um com sua história, suas referências e sua maneira de compreender o jogo, torna essa imersão ainda mais especial. <strong>Mais do que assistir a um seminário</strong>, você terá a oportunidade de aprender, observar detalhes, fazer conexões entre técnicas e levar novos conhecimentos para a sua rotina de treinos.</p>
+    <p class="closing reveal">Dois mestres, cada um com sua história e sua maneira de entender o jogo. <strong>Mais do que assistir a um seminário</strong>, você vai observar detalhes, conectar técnicas e levar novos conhecimentos para a sua rotina de treinos.</p>
   </div>
 </section>
 
@@ -320,9 +319,8 @@
       <p class="kicker reveal"><span>03</span>A convivência</p>
       <h2 data-split>O aprendizado acontece no tatame. A experiência vai <em>muito além dele.</em></h2>
       <p class="lead reveal">Na BJJ'S HOUSE, o Jiu-Jitsu também é vivido nos momentos entre um treino e outro.</p>
-      <p class="reveal">É na conversa após o seminário, na troca de experiências durante as refeições, na convivência com atletas de diferentes academias e trajetórias e nas novas amizades que surgem naturalmente que a experiência ganha outra dimensão.</p>
-      <p class="reveal">Você estará em um ambiente que favorece a conexão entre pessoas que entendem a disciplina, a dedicação e a paixão necessárias para evoluir no esporte. Serão momentos para aprender, compartilhar histórias, ampliar sua visão sobre o Jiu-Jitsu e criar memórias que continuam com você muito depois de deixar o tatame.</p>
-      <blockquote class="reveal">Tudo isso em um cenário privilegiado de Mangaratiba, no exclusivo Condomínio Portobello, onde natureza, conforto e lazer fazem parte da experiência.</blockquote>
+      <p class="reveal">Na conversa depois do seminário, nas refeições, na convivência com atletas de outras academias e nas amizades que surgem naturalmente. Momentos para compartilhar histórias e criar memórias que continuam com você muito depois do camp.</p>
+      <blockquote class="reveal">Tudo isso no exclusivo Condomínio Portobello, em Mangaratiba, onde natureza, conforto e lazer fazem parte da experiência.</blockquote>
     </div>
   </div>
 </section>
@@ -461,28 +459,28 @@
     <div class="casa-viewport">
       <div class="casa-track" data-gallery>
         <button class="tile" type="button" data-full="assets/img/casa-1.webp" data-cursor="Ver">
-          <img src="assets/img/casa-1.webp" alt="Piscina com deck de madeira e espreguiçadeiras em frente à casa, cercada de mata" width="996" height="882" loading="lazy" decoding="async">
+          <img src="assets/img/casa-1.webp" alt="Piscina com deck de madeira e espreguiçadeiras ao lado da casa, cercada de mata" width="1254" height="936" loading="lazy" decoding="async">
           <span class="tile-cap"><b>01</b>Piscina e deck</span>
         </button>
         <button class="tile" type="button" data-full="assets/img/casa-2.webp" data-cursor="Ver">
-          <img src="assets/img/casa-2.webp" alt="Sala de estar com sofá verde, forro de madeira e grandes janelas" width="445" height="534" loading="lazy" decoding="async">
+          <img src="assets/img/casa-2.webp" alt="Sala de estar com sofás verdes, forro de madeira, lareira e quadros coloridos" width="1254" height="936" loading="lazy" decoding="async">
           <span class="tile-cap"><b>02</b>Sala de estar</span>
         </button>
         <button class="tile" type="button" data-full="assets/img/hero-casa.webp" data-cursor="Ver">
-          <img src="assets/img/hero-casa.webp" alt="Fachada da casa iluminada ao entardecer, com jardim e palmeiras" width="1920" height="1166" loading="lazy" decoding="async">
+          <img src="assets/img/hero-casa.webp" alt="Fachada da casa iluminada ao entardecer, com jardim e palmeiras" width="1254" height="936" loading="lazy" decoding="async">
           <span class="tile-cap"><b>03</b>Fachada ao entardecer</span>
         </button>
         <button class="tile" type="button" data-full="assets/img/casa-3.webp" data-cursor="Ver">
-          <img src="assets/img/casa-3.webp" alt="Área da piscina com espreguiçadeiras e palmeiras diante da casa" width="445" height="534" loading="lazy" decoding="async">
+          <img src="assets/img/casa-3.webp" alt="Área da piscina com espreguiçadeiras e palmeiras diante da casa" width="1254" height="936" loading="lazy" decoding="async">
           <span class="tile-cap"><b>04</b>Área da piscina</span>
         </button>
         <button class="tile" type="button" data-full="assets/img/casa-4.webp" data-cursor="Ver">
-          <img src="assets/img/casa-4.webp" alt="Varanda coberta com forro de madeira, poltronas e vista para a mata" width="445" height="534" loading="lazy" decoding="async">
+          <img src="assets/img/casa-4.webp" alt="Varanda coberta com forro de madeira, sofás e vista para a mata" width="1254" height="936" loading="lazy" decoding="async">
           <span class="tile-cap"><b>05</b>Varanda coberta</span>
         </button>
         <button class="tile" type="button" data-full="assets/img/casa-5.webp" data-cursor="Ver">
-          <img src="assets/img/casa-5.webp" alt="Fachada da casa com piscina e jardim de palmeiras" width="445" height="534" loading="lazy" decoding="async">
-          <span class="tile-cap"><b>06</b>Jardim e piscina</span>
+          <img src="assets/img/casa-5.webp" alt="Banheiro com banheira, bancada dupla de madeira e espelho iluminado" width="1254" height="936" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>06</b>Banheiro</span>
         </button>
         <div class="casa-end">
           <svg class="ic"><use href="#i-pin"/></svg>
@@ -531,7 +529,7 @@
         </div>
       </div>
       <figure class="d-img">
-        <div class="pi" data-pimg><img src="assets/img/diamond.webp" alt="Dois atletas de Jiu-Jitsu em treino, um de kimono branco e outro de kimono preto" width="655" height="834" loading="lazy" decoding="async"></div>
+        <div class="pi"><picture><source media="(max-width:1000px)" srcset="assets/img/diamond-m.webp" width="1000" height="860"><img src="assets/img/diamond.webp" alt="Fernando Tererê e Tainan Dalpra" width="655" height="834" loading="lazy" decoding="async"></picture></div>
         <figcaption>Quinta · 10/12 · Dia extra exclusivo</figcaption>
       </figure>
     </article>
@@ -560,9 +558,9 @@
         <span class="serif">Day Pass · Escolha seu dia</span>
         <ul class="ticks"><li>Camp de 1 dia</li><li>Acesso à BJJ'S HOUSE (9h às 21h)</li><li>Todas as refeições incluídas, exceto bebida alcoólica</li><li class="no">Não inclui hospedagem</li></ul>
         <div class="daypass">
-          <div class="price-row"><div class="price"><small>Sexta-feira · 11/12</small><strong>R$ 1.200</strong></div><a class="btn btn-navy" data-buy="sexta" href="#contato"><span>Garantir sexta</span></a></div>
-          <div class="price-row"><div class="price"><small>Sábado · 12/12</small><strong>R$ 1.600</strong></div><a class="btn btn-navy" data-buy="sabado" href="#contato"><span>Garantir sábado</span></a></div>
-          <div class="price-row"><div class="price"><small>Domingo · 13/12</small><strong>R$ 1.400</strong></div><a class="btn btn-navy" data-buy="domingo" href="#contato"><span>Garantir domingo</span></a></div>
+          <div class="price-row"><div class="price"><small>Sexta-feira · 11/12</small><strong>R$ 1.200</strong><span class="dp-inc">Seminário de abertura, tarde de piscina e noite da pizza</span></div><a class="btn btn-navy" data-buy="sexta" href="#contato"><span>Garantir sexta</span></a></div>
+          <div class="price-row"><div class="price"><small>Sábado · 12/12</small><strong>R$ 1.600</strong><span class="dp-inc">Seminário, treino livre, rolas e churrasco</span></div><a class="btn btn-navy" data-buy="sabado" href="#contato"><span>Garantir sábado</span></a></div>
+          <div class="price-row"><div class="price"><small>Domingo · 13/12</small><strong>R$ 1.400</strong><span class="dp-inc">Seminário de encerramento, foto oficial com os mestres e almoço de despedida</span></div><a class="btn btn-navy" data-buy="domingo" href="#contato"><span>Garantir domingo</span></a></div>
         </div>
       </article>
       <article class="plano reveal" data-spot>
@@ -664,10 +662,9 @@
   <div class="final-bg" data-parallax="0.12" aria-hidden="true"><img src="assets/img/cta-bg.webp" alt="" width="1600" height="929" loading="lazy" decoding="async"></div>
   <canvas class="particles" data-particles aria-hidden="true"></canvas>
   <div class="wrap final-in">
-    <p class="kicker light reveal">Sua próxima evolução</p>
+    <p class="kicker light reveal">10 a 13 de dezembro · Mangaratiba · RJ</p>
     <h2 data-split>Sua próxima evolução pode <em>começar aqui.</em></h2>
-    <p class="reveal">Existem experiências que passam. E existem aquelas que ampliam nossa visão, renovam nossa motivação e nos fazem voltar para casa com novas referências, novos contatos e ainda mais vontade de evoluir.</p>
-    <p class="reveal">A BJJ'S HOUSE foi criada para quem entende que o Jiu-Jitsu é muito mais do que uma luta: é aprendizado contínuo, disciplina, superação e conexão entre pessoas.</p>
+    <p class="reveal">Existem experiências que passam. E existem as que renovam a motivação e fazem você voltar para casa com novas referências, novos contatos e ainda mais vontade de evoluir.</p>
     <p class="serif reveal">Garanta sua participação e prepare-se para viver o Jiu-Jitsu muito além do tatame.</p>
     <div class="cd cd-final reveal" role="timer" aria-label="Contagem regressiva para o início do camp" data-countdown data-countdown-wrap>
       <div><b data-cd="d">--</b><small>dias</small></div>
@@ -715,7 +712,7 @@
 
 <!-- Barra fixa (mobile) -->
 <div class="mbar" aria-label="Comprar ingresso">
-  <div><small>A partir de</small><strong>R$ 500</strong></div>
+  <a class="mbar-price" href="#ingressos"><small><span class="mb-camp">Camp </span>a partir de</small><strong>R$ 1.200</strong><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">, ver valores</span></a>
   <a class="btn btn-gold" href="#ingressos" data-wa-msg="Olá! Quero garantir minha vaga no Camp da BJJ&#39;S HOUSE (10 a 13/12). Pode me passar as opções?"><span>Garantir minha vaga</span></a>
 </div>
 

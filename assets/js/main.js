@@ -215,14 +215,14 @@
       heroImg.addEventListener("error", res, { once: true });
     });
     const fontsP = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-    const minP = new Promise((res) => setTimeout(res, 1750));
-    const maxP = new Promise((res) => setTimeout(res, 3800));
+    const minP = new Promise((res) => setTimeout(res, 900));
+    const maxP = new Promise((res) => setTimeout(res, 1800));
     Promise.race([Promise.all([imgP, fontsP, minP]), maxP]).then(() => {
       intro.classList.add("out");
       root.classList.remove("lock");
       requestAnimationFrame(() => { if (typeof layout === "function") layout(); });
-      setTimeout(setReady, 280);
-      setTimeout(() => intro.remove(), 1400);
+      setTimeout(setReady, 200);
+      setTimeout(() => intro.remove(), 1000);
       try { sessionStorage.setItem("bjj-intro", "1"); } catch (e) { /* modo privado */ }
     });
   } else {
