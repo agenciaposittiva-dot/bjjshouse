@@ -71,8 +71,9 @@ Abra **`assets/js/config.js`** e preencha:
 
 | Campo | O que é | Exemplo |
 |---|---|---|
-| `whatsapp` | Número da equipe com DDI + DDD, só números | `"5521999999999"` |
-| `checkout.diamond`, `gold`, `silver`, `sexta`, `sabado`, `domingo`, `guest` | Link de pagamento de cada plano | `"https://pay.kiwify.com.br/xxxx"` |
+| `whatsapp` | Número da equipe com DDI + DDD, só números (atual: +55 21 99315-0109) | `"5521993150109"` |
+| `botoesParaWhatsapp` | `true`: **todos os botões abrem o WhatsApp** (padrão atual). `false`: botões de plano usam o checkout | `true` |
+| `checkout.diamond`, `gold`, `silver`, `sexta`, `sabado`, `domingo`, `guest` | Link de pagamento de cada plano (usado só com `botoesParaWhatsapp: false`) | `"https://pay.kiwify.com.br/xxxx"` |
 | `parcelamento` | Texto exibido abaixo dos preços | `"em até 12x no cartão"` |
 | `vagasRestantes` | Mostra "Restam X vagas" (use `0` para marcar como esgotado) | `{ diamond: 2, gold: null, silver: null }` |
 | `endereco` | Endereço completo (atualiza rodapé e mapa) | `"Rua X, 123 · Portobello · Mangaratiba · RJ"` |
@@ -81,13 +82,29 @@ Abra **`assets/js/config.js`** e preencha:
 | `depoimentos` | Depoimentos reais de participantes | ver exemplo no arquivo |
 | `dataEvento` | Data/hora de início (contagem regressiva) | `"2026-12-10T09:00:00-03:00"` |
 
-### Como os botões de compra funcionam
+### Como os botões funcionam
 
-- Se o plano tiver **link de checkout** → o botão abre o checkout (em nova aba).
-- Se não tiver → abre o **WhatsApp** com a mensagem do plano já escrita
-  (ex.: *"Olá! Quero garantir minha vaga no plano Gold Immersion..."*).
-- Os parâmetros de campanha da URL (`utm_source`, `utm_campaign`, `fbclid`, `gclid`, `src`, `sck`...)
-  são repassados automaticamente para o link de checkout, para você saber de qual anúncio veio cada venda.
+**Hoje (`botoesParaWhatsapp: true`): todos os botões abrem o WhatsApp** (em nova aba / no app),
+cada um com uma mensagem pronta:
+
+| Botão | Mensagem enviada |
+|---|---|
+| Garantir minha vaga (topo, hero, menu, CTA final, barra do celular) | *Olá! Quero garantir minha vaga no Camp da BJJ'S HOUSE (10 a 13/12). Pode me passar as opções?* |
+| Conhecer a experiência | *Olá! Quero conhecer melhor a experiência da BJJ'S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra.* |
+| Ingressos a partir de R$ 500 | *Olá! Quero saber sobre os ingressos do Camp da BJJ'S HOUSE (10 a 13/12).* |
+| Quero fazer parte | *Olá! Quero fazer parte da BJJ'S HOUSE (10 a 13/12). Como faço para garantir minha vaga?* |
+| Quero viver isso (galeria da casa) | *Olá! Vi as fotos da casa e quero viver essa experiência na BJJ'S HOUSE (10 a 13/12).* |
+| Botões de cada plano (Diamond, Gold, Silver, sexta, sábado, domingo, Guest) | *Olá! Quero garantir minha vaga no plano [nome do plano] do Camp BJJ'S HOUSE (10 a 13/12).* |
+| Fale conosco / botão verde flutuante | `mensagemWhatsapp` do `config.js` |
+
+Para mudar uma mensagem, edite o atributo `data-wa-msg` do botão no `index.html`
+(as dos planos ficam em `assets/js/main.js`). Os itens do menu, as fotos da galeria e os
+controles (abrir menu, ampliar foto, perguntas) continuam funcionando normalmente.
+
+**Se um dia quiser usar links de pagamento**, mude para `botoesParaWhatsapp: false` e preencha `checkout`:
+os botões de plano abrem o checkout e os demais rolam até a seção de ingressos. Os parâmetros de
+campanha da URL (`utm_source`, `utm_campaign`, `fbclid`, `gclid`, `src`, `sck`...) são repassados
+automaticamente para o link de checkout.
 
 ### Eventos de rastreamento enviados
 
@@ -151,9 +168,9 @@ python3 -m http.server 8080
 
 ## Checklist de lançamento
 
-- [ ] WhatsApp preenchido em `config.js`
-- [ ] Links de checkout de todos os planos preenchidos e testados
-- [ ] Redirecionamento do checkout para `obrigado.html` configurado
+- [x] WhatsApp preenchido em `config.js` (+55 21 99315-0109) e todos os botões levando ao WhatsApp
+- [ ] (Opcional) Links de checkout, se for deixar de vender só pelo WhatsApp
+- [ ] (Se usar checkout) Redirecionamento do checkout para `obrigado.html` configurado
 - [ ] Meta Pixel e/ou GA4 configurados
 - [ ] Domínio definido e URLs de compartilhamento atualizadas
 - [ ] Teste do link no WhatsApp (pré-visualização com imagem)

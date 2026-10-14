@@ -13,13 +13,20 @@ window.BJJ_CONFIG = {
 
   /* WhatsApp da equipe: só números, com DDI + DDD. Ex.: "5521999999999".
      Enquanto estiver vazio, o botão flutuante e os botões de WhatsApp ficam ocultos. */
-  whatsapp: "",
+  whatsapp: "5521993150109",
+
+  /* true  = TODOS os botões da página abrem o WhatsApp, cada um com uma mensagem
+             pronta (as mensagens ficam no index.html, no atributo data-wa-msg).
+     false = os botões de plano usam os links de "checkout" abaixo e os demais
+             rolam até a seção de ingressos. */
+  botoesParaWhatsapp: true,
 
   /* Mensagem padrão quando a pessoa clica em "Fale conosco". */
   mensagemWhatsapp: "Olá! Quero saber mais sobre o Camp da BJJ'S HOUSE (10 a 13/12).",
 
   /* Links de pagamento de cada plano (Kiwify, Hotmart, Sympla, Mercado Pago, Asaas...).
-     Se um link ficar vazio, o botão abre o WhatsApp com a mensagem do plano já escrita. */
+     Só são usados quando botoesParaWhatsapp for false. Se um link ficar vazio,
+     o botão abre o WhatsApp com a mensagem do plano já escrita. */
   checkout: {
     diamond: "",
     gold: "",

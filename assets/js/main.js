@@ -74,12 +74,15 @@
     if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
   }
 
+  /* com botoesParaWhatsapp (padrão), todos os botões abrem o WhatsApp */
+  const allToWa = CFG.botoesParaWhatsapp !== false && !!waNumber;
+
   const checkout = CFG.checkout || {};
   $$("[data-buy]").forEach((a) => {
     const k = a.getAttribute("data-buy");
     const plano = PLANOS[k] || { nome: k, valor: 0 };
-    let link = checkout[k] ? withTracking(checkout[k]) :
-      waLink("Olá! Quero garantir minha vaga no plano " + plano.nome + " do Camp BJJ'S HOUSE (10 a 13/12).");
+    const waPlano = waLink("Olá! Quero garantir minha vaga no plano " + plano.nome + " do Camp BJJ'S HOUSE (10 a 13/12).");
+    let link = allToWa ? waPlano : (checkout[k] ? withTracking(checkout[k]) : waPlano);
     if (!link && CFG.email) {
       link = "mailto:" + CFG.email + "?subject=" + encodeURIComponent("Inscrição · " + plano.nome + " · BJJ'S HOUSE");
     }
@@ -104,6 +107,16 @@
       if (box) box.hidden = true;
     }
   });
+
+  /* demais botões (Garantir minha vaga, Conhecer a experiência...): WhatsApp com a
+     mensagem do atributo data-wa-msg; qualquer botão novo sem mensagem usa a padrão */
+  if (allToWa) {
+    $$('a.btn[href^="#"]:not([data-buy]):not([data-wa]):not([data-insta]):not([data-email])').forEach((a) => {
+      openExternal(a, waLink(a.getAttribute("data-wa-msg") || CFG.mensagemWhatsapp));
+      const label = a.textContent.trim();
+      a.addEventListener("click", () => track("Contact", "contact", { fb: { content_name: label }, ga: { method: "whatsapp", cta: label } }));
+    });
+  }
 
   if (CFG.instagram) {
     const ig = $("[data-insta]");
