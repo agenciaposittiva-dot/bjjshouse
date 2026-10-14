@@ -33,7 +33,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
 <link rel="preload" as="image" href="assets/img/hero-casa.webp" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add("js")</script>
+<script>(function(h){h.classList.add("js");try{if(sessionStorage.getItem("bjj-intro"))h.classList.add("no-intro")}catch(e){}try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)h.classList.add("rm","no-intro")}catch(e){}})(document.documentElement)</script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 
 <script type="application/ld+json">
 {
@@ -83,6 +85,16 @@
 </head>
 <body>
 
+<!-- Intro (aparece na primeira visita da sessão) -->
+<div class="intro" aria-hidden="true">
+  <div class="intro-in">
+    <img class="intro-logo" src="assets/img/logo.webp" alt="" width="132" height="132">
+    <p class="intro-word"><span style="--i:0">B</span><span style="--i:1">J</span><span style="--i:2">J</span><span style="--i:3">'</span><span style="--i:4">S</span><span class="gap"></span><span style="--i:5">H</span><span style="--i:6">O</span><span style="--i:7">U</span><span style="--i:8">S</span><span style="--i:9">E</span></p>
+    <span class="intro-bar"><i></i></span>
+    <p class="intro-sub">Muito além do tatame</p>
+  </div>
+</div>
+
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <!-- Ícones (sprite) -->
@@ -91,19 +103,18 @@
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="1.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
     <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3.5h10v5.5a5 5 0 0 1-10 0V3.5z"/><path d="M7 5.5H3.5V7A3.5 3.5 0 0 0 7.2 10.5M17 5.5h3.5V7a3.5 3.5 0 0 1-3.7 3.5M12 14v3.5M8 20.5h8M9.5 17.5h5v3h-5z"/></symbol>
-    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20.5c.6-3.6 3.2-5.7 6.5-5.7s5.9 2.1 6.5 5.7"/><path d="M15.8 4.7a3.5 3.5 0 0 1 0 6.6M18.2 14.9c1.8.8 2.9 2.6 3.3 5.6"/></symbol>
-    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
-    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/></symbol>
-    <symbol id="i-food" viewBox="0 0 24 24"><path d="M6.5 2.5v19M4 2.5V8a2.5 2.5 0 0 0 5 0V2.5M17.5 21.5v-8h-3v-4c0-3.5 1.4-5.8 3-7v19"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M12 2v1.5M5.2 4.8l1 1M18.8 4.8l-1 1M3 11h1.5M19.5 11H21"/><path d="M2 16.5c1.7 0 1.7 1.5 3.3 1.5s1.7-1.5 3.4-1.5 1.6 1.5 3.3 1.5 1.6-1.5 3.3-1.5 1.7 1.5 3.4 1.5 1.6-1.5 3.3-1.5M2 20.5c1.7 0 1.7 1.5 3.3 1.5s1.7-1.5 3.4-1.5 1.6 1.5 3.3 1.5 1.6-1.5 3.3-1.5 1.7 1.5 3.4 1.5 1.6-1.5 3.3-1.5"/></symbol>
-    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.6-2.5h6.2L16.7 7h2.8A1.5 1.5 0 0 1 21 8.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/><circle cx="12" cy="13" r="3.8"/></symbol>
-    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5M5.5 9.5v11h13v-11"/><path d="M10 20.5v-6h4v6"/></symbol>
-    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2.5 19.5V5M2.5 14h19v5.5M21.5 14v-1.5A3.5 3.5 0 0 0 18 9h-7v5"/><circle cx="6.8" cy="10.8" r="2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle pathLength="1" cx="9" cy="8" r="3.5"/><path pathLength="1" d="M2.5 20.5c.6-3.6 3.2-5.7 6.5-5.7s5.9 2.1 6.5 5.7"/><path pathLength="1" d="M15.8 4.7a3.5 3.5 0 0 1 0 6.6M18.2 14.9c1.8.8 2.9 2.6 3.3 5.6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle pathLength="1" cx="12" cy="12" r="9"/><circle pathLength="1" cx="12" cy="12" r="5"/><circle pathLength="1" cx="12" cy="12" r="1.2"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path pathLength="1" d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path pathLength="1" d="M6.5 2.5v19M4 2.5V8a2.5 2.5 0 0 0 5 0V2.5M17.5 21.5v-8h-3v-4c0-3.5 1.4-5.8 3-7v19"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle pathLength="1" cx="12" cy="9" r="3.5"/><path pathLength="1" d="M12 2v1.5M5.2 4.8l1 1M18.8 4.8l-1 1M3 11h1.5M19.5 11H21"/><path pathLength="1" d="M2 16.5c1.7 0 1.7 1.5 3.3 1.5s1.7-1.5 3.4-1.5 1.6 1.5 3.3 1.5 1.6-1.5 3.3-1.5 1.7 1.5 3.4 1.5 1.6-1.5 3.3-1.5M2 20.5c1.7 0 1.7 1.5 3.3 1.5s1.7-1.5 3.4-1.5 1.6 1.5 3.3 1.5 1.6-1.5 3.3-1.5 1.7 1.5 3.4 1.5 1.6-1.5 3.3-1.5"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path pathLength="1" d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.6-2.5h6.2L16.7 7h2.8A1.5 1.5 0 0 1 21 8.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/><circle pathLength="1" cx="12" cy="13" r="3.8"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h16v11.5H9.5L4 20.5z"/><path d="M8 9h8M8 12h5"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2.5h8.5L19 7v14.5H6z"/><path d="M14 2.5V7h5M9 12h7M9 15.5h7"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 4.8 4.8L19.5 7"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path pathLength="1" d="m4.5 12.5 4.8 4.8L19.5 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path pathLength="1" d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-15M6 10.5l6-6 6 6"/></symbol>
     <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
     <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
     <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
@@ -112,6 +123,9 @@
     <symbol id="i-wa" viewBox="0 0 24 24"><path stroke="none" fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></symbol>
   </defs>
 </svg>
+
+<!-- Cursor personalizado (desktop) -->
+<div class="cursor" aria-hidden="true"><span class="cursor-ring"><em></em></span><span class="cursor-dot"></span></div>
 
 <!-- ===================== TOPO ===================== -->
 <header class="top" id="topo">
@@ -136,92 +150,112 @@
       <a href="#duvidas">Dúvidas</a>
       <a class="btn btn-gold menu-cta" href="#ingressos">Garantir minha vaga</a>
     </nav>
-    <a class="btn btn-gold nav-cta" href="#ingressos">Garantir minha vaga</a>
+    <a class="btn btn-gold nav-cta" href="#ingressos" data-magnetic>Garantir minha vaga</a>
     <button class="burger" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
   </div>
+  <span class="progress" aria-hidden="true"><i></i></span>
 </header>
 
 <main id="conteudo">
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-bg-m"><img src="assets/img/hero-casa.webp" alt="" width="1920" height="1166" fetchpriority="high"></div></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <canvas class="particles" data-particles aria-hidden="true"></canvas>
+
   <div class="wrap hero-grid">
-    <div class="hero-text">
-      <p class="hero-date">10 a 13 de dezembro · Condomínio Portobello · Mangaratiba · RJ</p>
-      <h1><span class="h1-brand">BJJ'S HOUSE</span><span class="sr-only"> · Camp de Jiu-Jitsu com Fernando Tererê e Tainan Dalpra</span></h1>
-      <p class="tag serif">Muito além do tatame.</p>
-      <p class="sub">Um camp de Jiu-Jitsu com <strong>Fernando Tererê</strong> e <strong>Tainan Dalpra</strong> em uma casa de alto padrão na Costa Verde do Rio de Janeiro.</p>
-      <p class="copy">Aprenda com lendas. Evolua com campeões. Viva o Jiu-Jitsu em outro nível.</p>
-      <div class="btns">
-        <a class="btn btn-gold btn-lg" href="#ingressos">Garantir minha vaga <svg class="ic"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-line btn-lg" href="#experiencia">Conhecer a experiência</a>
+    <div class="hero-text" data-hero-content>
+      <p class="hero-date" data-h style="--d:1">10 a 13 de dezembro · Condomínio Portobello · Mangaratiba · RJ</p>
+      <h1>
+        <span class="sr-only">BJJ'S HOUSE · Camp de Jiu-Jitsu com Fernando Tererê e Tainan Dalpra</span>
+        <span class="h1-brand" aria-hidden="true"><span class="h1w"><span class="ch" style="--i:0">B</span><span class="ch" style="--i:1">J</span><span class="ch" style="--i:2">J</span><span class="ch" style="--i:3">'</span><span class="ch" style="--i:4">S</span></span> <span class="h1w"><span class="ch" style="--i:5">H</span><span class="ch" style="--i:6">O</span><span class="ch" style="--i:7">U</span><span class="ch" style="--i:8">S</span><span class="ch" style="--i:9">E</span></span></span>
+      </h1>
+      <p class="tag serif" data-h style="--d:6"><span class="shimmer">Muito além do tatame.</span></p>
+      <p class="sub" data-h style="--d:7">Um camp de Jiu-Jitsu com <strong>Fernando Tererê</strong> e <strong>Tainan Dalpra</strong> em uma casa de alto padrão na Costa Verde do Rio de Janeiro.</p>
+      <p class="copy" data-h style="--d:8">Aprenda com lendas. Evolua com campeões. Viva o Jiu-Jitsu em outro nível.</p>
+      <div class="btns" data-h style="--d:9">
+        <a class="btn btn-gold btn-lg" href="#ingressos" data-magnetic><span>Garantir minha vaga</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-line btn-lg" href="#experiencia" data-magnetic><span>Conhecer a experiência</span></a>
       </div>
-      <p class="seal">Vagas limitadas · 50 por dia · Diamond: só 4 vagas</p>
+      <p class="seal" data-h style="--d:10">Vagas limitadas · 50 por dia · Diamond: só 4 vagas</p>
     </div>
 
-    <aside class="hero-card" aria-label="Resumo do camp">
-      <div data-countdown-wrap>
-        <p class="hc-label">O camp começa em</p>
-        <div class="cd" role="timer" aria-label="Contagem regressiva para o início do camp" data-countdown>
-          <div><b data-cd="d">--</b><small>dias</small></div>
-          <div><b data-cd="h">--</b><small>horas</small></div>
-          <div><b data-cd="m">--</b><small>min</small></div>
-          <div><b data-cd="s">--</b><small>seg</small></div>
+    <div class="hero-card-wrap" data-h style="--d:8">
+      <aside class="hero-card" aria-label="Resumo do camp" data-hero-card>
+        <span class="hc-shine" aria-hidden="true"></span>
+        <div data-countdown-wrap>
+          <p class="hc-label">O camp começa em</p>
+          <div class="cd" role="timer" aria-label="Contagem regressiva para o início do camp" data-countdown>
+            <div><b data-cd="d">--</b><small>dias</small></div>
+            <div><b data-cd="h">--</b><small>horas</small></div>
+            <div><b data-cd="m">--</b><small>min</small></div>
+            <div><b data-cd="s">--</b><small>seg</small></div>
+          </div>
         </div>
-      </div>
-      <div class="hc-masters">
-        <div class="avatars">
-          <img src="assets/img/avatar-fernando.webp" alt="Fernando Tererê" width="56" height="56">
-          <img src="assets/img/avatar-tainan.webp" alt="Tainan Dalpra" width="56" height="56">
+        <div class="hc-masters">
+          <div class="avatars">
+            <img src="assets/img/avatar-fernando.webp" alt="Fernando Tererê" width="56" height="56">
+            <img src="assets/img/avatar-tainan.webp" alt="Tainan Dalpra" width="56" height="56">
+          </div>
+          <p><small>Com os mestres</small><b>Fernando Tererê &amp; Tainan Dalpra</b></p>
         </div>
-        <p><small>Com os mestres</small><b>Fernando Tererê &amp; Tainan Dalpra</b></p>
-      </div>
-      <ul class="hc-list">
-        <li><svg class="ic"><use href="#i-check"/></svg>3 dias de camp + dia extra exclusivo Diamond</li>
-        <li><svg class="ic"><use href="#i-check"/></svg>Refeições incluídas em todos os planos</li>
-        <li><svg class="ic"><use href="#i-check"/></svg>Opções com hospedagem</li>
-      </ul>
-      <a class="btn btn-gold btn-block" href="#ingressos">Ingressos a partir de R$ 500</a>
-    </aside>
+        <ul class="hc-list">
+          <li><svg class="ic"><use href="#i-check"/></svg>3 dias de camp + dia extra exclusivo Diamond</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Refeições incluídas em todos os planos</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Opções com hospedagem</li>
+        </ul>
+        <a class="btn btn-gold btn-block" href="#ingressos"><span>Ingressos a partir de R$ 500</span></a>
+      </aside>
+    </div>
   </div>
 
   <div class="wrap">
     <ul class="facts">
-      <li><svg class="ic"><use href="#i-calendar"/></svg><div><b>10 a 13 de dezembro</b><span>Quinta a domingo</span></div></li>
-      <li><svg class="ic"><use href="#i-pin"/></svg><div><b>Condomínio Portobello</b><span>Mangaratiba · Costa Verde · RJ</span></div></li>
-      <li><svg class="ic"><use href="#i-trophy"/></svg><div><b>6 títulos mundiais</b><span>Faixa-preta, somados pelos mestres</span></div></li>
-      <li><svg class="ic"><use href="#i-users"/></svg><div><b>50 vagas por dia</b><span>Diamond: somente 4 vagas</span></div></li>
+      <li data-h style="--d:11"><svg class="ic"><use href="#i-calendar"/></svg><div><b>10 a 13 de dezembro</b><span>Quinta a domingo</span></div></li>
+      <li data-h style="--d:12"><svg class="ic"><use href="#i-pin"/></svg><div><b>Condomínio Portobello</b><span>Mangaratiba · Costa Verde · RJ</span></div></li>
+      <li data-h style="--d:13"><svg class="ic"><use href="#i-trophy"/></svg><div><b><span data-count="6">6</span> títulos mundiais</b><span>Faixa-preta, somados pelos mestres</span></div></li>
+      <li data-h style="--d:14"><svg class="ic"><use href="#i-users"/></svg><div><b><span data-count="50">50</span> vagas por dia</b><span>Diamond: somente 4 vagas</span></div></li>
     </ul>
   </div>
+
+  <a class="scroll-cue" href="#experiencia" aria-label="Rolar para a próxima seção"><span>Role para descobrir</span><i></i></a>
 </section>
 
+<!-- ===================== FAIXAS ===================== -->
+<div class="bands" aria-hidden="true">
+  <div class="band band-a"><div class="band-track" data-marquee><div class="mq-group"><span>BJJ'S HOUSE</span><i>✦</i><span>Fernando Tererê</span><i>✦</i><span>Tainan Dalpra</span><i>✦</i><span>10 — 13 de dezembro</span><i>✦</i><span>Mangaratiba · RJ</span><i>✦</i></div></div></div>
+  <div class="band band-b"><div class="band-track" data-marquee data-dir="-1"><div class="mq-group"><span class="o">Muito além do tatame</span><i>✦</i><span class="o">Aprender</span><i>✦</i><span class="o">Conviver</span><i>✦</i><span class="o">Viver</span><i>✦</i><span class="o">Exclusive event</span><i>✦</i></div></div></div>
+</div>
+
 <!-- ===================== 01 · EXPERIÊNCIA ===================== -->
-<section id="experiencia">
+<section id="experiencia" class="exp">
+  <span class="ghost-num" data-parallax="-0.12" aria-hidden="true">01</span>
   <div class="wrap">
     <div class="two">
-      <div class="reveal">
-        <p class="kicker"><span>01</span>A experiência</p>
-        <h2>Imagine estar frente a frente com dois grandes nomes do Jiu-Jitsu mundial.</h2>
+      <div>
+        <p class="kicker reveal"><span>01</span>A experiência</p>
+        <h2 data-split>Imagine estar frente a frente com <em>dois grandes nomes</em> do Jiu-Jitsu mundial.</h2>
       </div>
-      <div class="stack reveal">
-        <p class="lead">Aprender com suas técnicas, observar seus detalhes, aperfeiçoar seus movimentos e trocar experiências com atletas que compartilham a mesma paixão que você.</p>
-        <p>Agora, imagine viver tudo isso em uma casa extraordinária na Costa Verde do Rio de Janeiro, cercada pela natureza, com piscina, gastronomia e um ambiente pensado para conectar pessoas que vivem o Jiu-Jitsu dentro e fora do tatame.</p>
-        <p><strong>Essa é a BJJ'S HOUSE:</strong> uma experiência exclusiva que une aprendizado, convivência e a oportunidade de viver o esporte de uma maneira diferente de tudo o que você já experimentou.</p>
+      <div class="stack">
+        <p class="lead reveal">Aprender com suas técnicas, observar seus detalhes, aperfeiçoar seus movimentos e trocar experiências com atletas que compartilham a mesma paixão que você.</p>
+        <p class="reveal">Agora, imagine viver tudo isso em uma casa extraordinária na Costa Verde do Rio de Janeiro, cercada pela natureza, com piscina, gastronomia e um ambiente pensado para conectar pessoas que vivem o Jiu-Jitsu dentro e fora do tatame.</p>
+        <p class="reveal"><strong>Essa é a BJJ'S HOUSE:</strong> uma experiência exclusiva que une aprendizado, convivência e a oportunidade de viver o esporte de uma maneira diferente de tudo o que você já experimentou.</p>
       </div>
     </div>
 
     <div class="pillars">
-      <article class="pillar reveal">
+      <article class="pillar reveal" data-spot>
         <span class="pnum">I</span>
         <h3>Aprender</h3>
         <p>Seminários técnicos com duas lendas do esporte. Detalhes, conexões entre técnicas e a visão de luta de quem venceu no mais alto nível.</p>
       </article>
-      <article class="pillar reveal">
+      <article class="pillar reveal" data-spot>
         <span class="pnum">II</span>
         <h3>Conviver</h3>
         <p>Refeições, rolas e conversas com atletas de diferentes academias e trajetórias. Novas amizades que surgem naturalmente.</p>
       </article>
-      <article class="pillar reveal">
+      <article class="pillar reveal" data-spot>
         <span class="pnum">III</span>
         <h3>Viver</h3>
         <p>Dias em uma casa de alto padrão no Condomínio Portobello, com piscina, natureza e gastronomia. O Jiu-Jitsu por inteiro.</p>
@@ -231,30 +265,41 @@
 </section>
 
 <!-- ===================== 02 · MESTRES ===================== -->
-<section class="dark" id="mestres">
+<section class="dark grain" id="mestres">
+  <div class="ghost-text" data-parallax-x="0.25" aria-hidden="true">Lendas do Jiu-Jitsu ✦ Lendas do Jiu-Jitsu ✦ Lendas do Jiu-Jitsu</div>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="kicker"><span>02</span>Os mestres</p>
-      <h2>Dois mestres. Duas trajetórias extraordinárias. Uma oportunidade única de aprender.</h2>
+    <div class="sec-head">
+      <p class="kicker reveal"><span>02</span>Os mestres</p>
+      <h2 data-split>Dois mestres. Duas trajetórias <em>extraordinárias.</em> Uma oportunidade única de aprender.</h2>
     </div>
     <div class="mestres-grid">
-      <article class="mestre reveal">
-        <figure class="mestre-img">
-          <img src="assets/img/fernando-terere.webp" alt="Fernando Tererê comemorando vitória de kimono azul" width="854" height="626" loading="lazy" decoding="async">
+      <article class="mestre">
+        <figure class="mestre-img reveal r-clip">
+          <div class="pi" data-pimg><img src="assets/img/fernando-terere.webp" alt="Fernando Tererê comemorando vitória de kimono azul" width="854" height="626" loading="lazy" decoding="async"></div>
+          <span class="m-badge">Faixa-preta · Lenda</span>
         </figure>
-        <h3>Fernando Tererê</h3>
-        <p class="serif">Uma lenda do Jiu-Jitsu.</p>
-        <p>Faixa-preta e um dos nomes históricos do esporte, Fernando Tererê construiu uma trajetória marcante no Jiu-Jitsu brasileiro e internacional. Estar com um atleta dessa dimensão é uma oportunidade de se aproximar de sua experiência, conhecer sua visão de luta e ampliar seu repertório técnico.</p>
-        <ul class="chips"><li>2x campeão mundial faixa-preta</li><li>Campeão mundial em 4 faixas</li><li>2x campeão brasileiro</li></ul>
+        <h3 data-split>Fernando Tererê</h3>
+        <p class="serif reveal">Uma lenda do Jiu-Jitsu.</p>
+        <p class="reveal">Faixa-preta e um dos nomes históricos do esporte, Fernando Tererê construiu uma trajetória marcante no Jiu-Jitsu brasileiro e internacional. Estar com um atleta dessa dimensão é uma oportunidade de se aproximar de sua experiência, conhecer sua visão de luta e ampliar seu repertório técnico.</p>
+        <ul class="mstats reveal">
+          <li><b><span data-count="2">2</span>×</b><small>Campeão mundial faixa-preta</small></li>
+          <li><b><span data-count="4">4</span></b><small>Faixas com título mundial</small></li>
+          <li><b><span data-count="2">2</span>×</b><small>Campeão brasileiro</small></li>
+        </ul>
       </article>
-      <article class="mestre reveal">
-        <figure class="mestre-img">
-          <img src="assets/img/tainan-dalpra.webp" alt="Tainan Dalpra com medalhas de campeão mundial IBJJF" width="854" height="626" loading="lazy" decoding="async">
+      <article class="mestre m2">
+        <figure class="mestre-img reveal r-clip">
+          <div class="pi" data-pimg><img src="assets/img/tainan-dalpra.webp" alt="Tainan Dalpra com medalhas de campeão mundial IBJJF" width="854" height="626" loading="lazy" decoding="async"></div>
+          <span class="m-badge">Faixa-preta · IBJJF</span>
         </figure>
-        <h3>Tainan Dalpra</h3>
-        <p class="serif">Excelência que inspira campeões.</p>
-        <p>Faixa-preta e múltiplo campeão mundial pela IBJJF, com conquistas expressivas que incluem o tetracampeonato mundial e campanhas de Grand Slam, Tainan representa uma geração de atletas de alto rendimento, reconhecidos pela técnica, consistência e excelência competitiva.</p>
-        <ul class="chips"><li>4x campeão mundial IBJJF</li><li>5x Pan-Americano</li><li>2x Grand Slam IBJJF</li></ul>
+        <h3 data-split>Tainan Dalpra</h3>
+        <p class="serif reveal">Excelência que inspira campeões.</p>
+        <p class="reveal">Faixa-preta e múltiplo campeão mundial pela IBJJF, com conquistas expressivas que incluem o tetracampeonato mundial e campanhas de Grand Slam, Tainan representa uma geração de atletas de alto rendimento, reconhecidos pela técnica, consistência e excelência competitiva.</p>
+        <ul class="mstats reveal">
+          <li><b><span data-count="4">4</span>×</b><small>Campeão mundial IBJJF</small></li>
+          <li><b><span data-count="5">5</span>×</b><small>Pan-Americano</small></li>
+          <li><b><span data-count="2">2</span>×</b><small>Grand Slam IBJJF</small></li>
+        </ul>
       </article>
     </div>
     <p class="closing reveal">Ter a oportunidade de aprender com esses dois mestres, cada um com sua história, suas referências e sua maneira de compreender o jogo, torna essa imersão ainda mais especial. <strong>Mais do que assistir a um seminário</strong>, você terá a oportunidade de aprender, observar detalhes, fazer conexões entre técnicas e levar novos conhecimentos para a sua rotina de treinos.</p>
@@ -264,54 +309,59 @@
 <!-- ===================== 03 · CONVIVÊNCIA ===================== -->
 <section class="cream" id="convivencia">
   <div class="wrap conv">
-    <figure class="conv-img reveal">
-      <img src="assets/img/treino-tatame.webp" alt="Fernando Tererê ensinando técnica no tatame" width="825" height="1081" loading="lazy" decoding="async">
-    </figure>
-    <div class="stack reveal">
-      <p class="kicker"><span>03</span>A convivência</p>
-      <h2>O aprendizado acontece no tatame. A experiência vai muito além dele.</h2>
-      <p class="lead">Na BJJ'S HOUSE, o Jiu-Jitsu também é vivido nos momentos entre um treino e outro.</p>
-      <p>É na conversa após o seminário, na troca de experiências durante as refeições, na convivência com atletas de diferentes academias e trajetórias e nas novas amizades que surgem naturalmente que a experiência ganha outra dimensão.</p>
-      <p>Você estará em um ambiente que favorece a conexão entre pessoas que entendem a disciplina, a dedicação e a paixão necessárias para evoluir no esporte. Serão momentos para aprender, compartilhar histórias, ampliar sua visão sobre o Jiu-Jitsu e criar memórias que continuam com você muito depois de deixar o tatame.</p>
-      <blockquote>Tudo isso em um cenário privilegiado de Mangaratiba, no exclusivo Condomínio Portobello, onde natureza, conforto e lazer fazem parte da experiência.</blockquote>
+    <div class="conv-media">
+      <span class="conv-frame" data-parallax="0.05" aria-hidden="true"></span>
+      <figure class="conv-img reveal r-clip">
+        <div class="pi" data-pimg><img src="assets/img/treino-tatame.webp" alt="Fernando Tererê ensinando técnica no tatame" width="825" height="1081" loading="lazy" decoding="async"></div>
+      </figure>
+      <p class="conv-badge reveal r-zoom"><b>No tatame</b>com quem fez história</p>
+    </div>
+    <div class="stack">
+      <p class="kicker reveal"><span>03</span>A convivência</p>
+      <h2 data-split>O aprendizado acontece no tatame. A experiência vai <em>muito além dele.</em></h2>
+      <p class="lead reveal">Na BJJ'S HOUSE, o Jiu-Jitsu também é vivido nos momentos entre um treino e outro.</p>
+      <p class="reveal">É na conversa após o seminário, na troca de experiências durante as refeições, na convivência com atletas de diferentes academias e trajetórias e nas novas amizades que surgem naturalmente que a experiência ganha outra dimensão.</p>
+      <p class="reveal">Você estará em um ambiente que favorece a conexão entre pessoas que entendem a disciplina, a dedicação e a paixão necessárias para evoluir no esporte. Serão momentos para aprender, compartilhar histórias, ampliar sua visão sobre o Jiu-Jitsu e criar memórias que continuam com você muito depois de deixar o tatame.</p>
+      <blockquote class="reveal">Tudo isso em um cenário privilegiado de Mangaratiba, no exclusivo Condomínio Portobello, onde natureza, conforto e lazer fazem parte da experiência.</blockquote>
     </div>
   </div>
 </section>
 
 <!-- ===================== 04 · O QUE VOCÊ VAI VIVER ===================== -->
-<section id="beneficios">
+<section id="beneficios" class="benef">
+  <span class="ghost-num right" data-parallax="-0.12" aria-hidden="true">04</span>
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <p class="kicker"><span>04</span>O que você vai viver</p>
-      <h2>Tudo pensado para você treinar, conviver e evoluir.</h2>
+    <div class="sec-head center">
+      <p class="kicker reveal"><span>04</span>O que você vai viver</p>
+      <h2 data-split>Tudo pensado para você <em>treinar, conviver</em> e evoluir.</h2>
     </div>
     <div class="benefits">
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-target"/></svg>
         <h3>Seminários com os mestres</h3>
         <p>Sessões técnicas com Fernando Tererê e Tainan Dalpra para você observar detalhes, conectar técnicas e levar novos conhecimentos para a rotina de treinos.</p>
       </article>
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-swap"/></svg>
         <h3>Treino livre e rolas</h3>
         <p>Hora de colocar em prática o que aprendeu e rolar com atletas de diferentes academias, faixas e estilos de jogo.</p>
       </article>
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-food"/></svg>
         <h3>Gastronomia inclusa</h3>
         <p>Café da manhã na casa, noite da pizza, churrasco e almoço de despedida. Todas as refeições incluídas, exceto bebidas alcoólicas.</p>
       </article>
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-sun"/></svg>
         <h3>Piscina e natureza</h3>
         <p>Tardes de piscina e convivência em uma casa de alto padrão, cercada pelo verde da Costa Verde fluminense.</p>
       </article>
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-users"/></svg>
         <h3>Conexões para a vida</h3>
         <p>Novas amizades e contatos com pessoas que compartilham a mesma paixão, dentro e fora do tatame.</p>
       </article>
-      <article class="benefit reveal">
+      <article class="benefit reveal" data-spot data-tilt>
         <svg class="bic"><use href="#i-camera"/></svg>
         <h3>Foto oficial com os mestres</h3>
         <p>Um registro para guardar o encontro com duas referências do Jiu-Jitsu mundial.</p>
@@ -323,14 +373,14 @@
 <!-- ===================== 05 · PARA QUEM É ===================== -->
 <section class="cream" id="para-quem">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <p class="kicker"><span>05</span>Para quem é</p>
-      <h2>A BJJ'S HOUSE foi criada para quem vive o Jiu-Jitsu.</h2>
+    <div class="sec-head center">
+      <p class="kicker reveal"><span>05</span>Para quem é</p>
+      <h2 data-split>A BJJ'S HOUSE foi criada para quem <em>vive</em> o Jiu-Jitsu.</h2>
     </div>
     <div class="fit">
-      <div class="fit-col yes reveal">
+      <div class="fit-col yes reveal r-left">
         <h3>É para você que…</h3>
-        <ul>
+        <ul class="stagger">
           <li><svg class="ic"><use href="#i-check"/></svg>Treina Jiu-Jitsu, de qualquer faixa, e quer evoluir de verdade.</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Quer aprender diretamente com campeões mundiais.</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Valoriza conviver com pessoas que vivem o esporte como você.</li>
@@ -338,112 +388,136 @@
           <li><svg class="ic"><use href="#i-check"/></svg>Quer voltar para casa com novas referências e motivação renovada.</li>
         </ul>
       </div>
-      <div class="fit-col no reveal">
+      <div class="fit-col no reveal r-right">
         <h3>Não é para você se…</h3>
-        <ul>
+        <ul class="stagger">
           <li><svg class="ic"><use href="#i-x"/></svg>Procura apenas uma aula rápida, sem convivência.</li>
           <li><svg class="ic"><use href="#i-x"/></svg>Não quer sair da rotina para viver o Jiu-Jitsu por inteiro.</li>
           <li><svg class="ic"><use href="#i-x"/></svg>Prefere deixar para depois. As vagas são limitadas a 50 por dia.</li>
         </ul>
-        <a class="btn btn-navy" href="#ingressos">Quero fazer parte <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-navy" href="#ingressos" data-magnetic><span>Quero fazer parte</span><svg class="ic"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== 06 · PROGRAMAÇÃO ===================== -->
-<section class="dark" id="programacao">
+<section class="dark grain" id="programacao">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="kicker"><span>06</span>Programação</p>
-      <h2>Quatro dias para viver o Jiu-Jitsu por inteiro.</h2>
-      <p class="sec-sub">Seminários com os mestres, treinos, refeições e convivência em uma casa de alto padrão. A programação completa, com horários, é enviada a todos os inscritos.</p>
+    <div class="sec-head">
+      <p class="kicker reveal"><span>06</span>Programação</p>
+      <h2 data-split>Quatro dias para viver o Jiu-Jitsu <em>por inteiro.</em></h2>
+      <p class="sec-sub reveal">Seminários com os mestres, treinos, refeições e convivência em uma casa de alto padrão. A programação completa, com horários, é enviada a todos os inscritos.</p>
     </div>
-    <ol class="days">
-      <li class="day exclusive reveal">
-        <span class="when">Quinta · 10/12</span>
-        <h3>Dia extra</h3>
-        <span class="serif">Exclusivo Diamond</span>
-        <ul class="ticks"><li>Chegada e check-in na BJJ'S HOUSE</li><li>Aula particular com Fernando Tererê e Tainan Dalpra</li><li>Jantar exclusivo com os dois atletas</li></ul>
-      </li>
-      <li class="day reveal">
-        <span class="when">Sexta · 11/12</span>
-        <h3>Dia 1 do camp</h3>
-        <span class="serif">Abertura</span>
-        <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário técnico com os mestres</li><li>Tarde de piscina e convivência</li><li>Noite da pizza</li></ul>
-      </li>
-      <li class="day reveal">
-        <span class="when">Sábado · 12/12</span>
-        <h3>Dia 2 do camp</h3>
-        <span class="serif">Imersão total</span>
-        <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário técnico com os mestres</li><li>Treino livre e rolas</li><li>Churrasco na BJJ'S HOUSE</li></ul>
-      </li>
-      <li class="day reveal">
-        <span class="when">Domingo · 13/12</span>
-        <h3>Dia 3 do camp</h3>
-        <span class="serif">Encerramento</span>
-        <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário de encerramento</li><li>Foto oficial com os mestres</li><li>Almoço de despedida</li></ul>
-      </li>
-    </ol>
+    <div class="tl" data-progress>
+      <div class="tl-line" aria-hidden="true"><i></i></div>
+      <ol class="days">
+        <li class="day exclusive reveal" data-spot>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="when">Quinta · 10/12</span>
+          <h3>Dia extra</h3>
+          <span class="serif">Exclusivo Diamond</span>
+          <ul class="ticks"><li>Chegada e check-in na BJJ'S HOUSE</li><li>Aula particular com Fernando Tererê e Tainan Dalpra</li><li>Jantar exclusivo com os dois atletas</li></ul>
+        </li>
+        <li class="day reveal" data-spot>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="when">Sexta · 11/12</span>
+          <h3>Dia 1 do camp</h3>
+          <span class="serif">Abertura</span>
+          <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário técnico com os mestres</li><li>Tarde de piscina e convivência</li><li>Noite da pizza</li></ul>
+        </li>
+        <li class="day reveal" data-spot>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="when">Sábado · 12/12</span>
+          <h3>Dia 2 do camp</h3>
+          <span class="serif">Imersão total</span>
+          <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário técnico com os mestres</li><li>Treino livre e rolas</li><li>Churrasco na BJJ'S HOUSE</li></ul>
+        </li>
+        <li class="day reveal" data-spot>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="when">Domingo · 13/12</span>
+          <h3>Dia 3 do camp</h3>
+          <span class="serif">Encerramento</span>
+          <ul class="ticks"><li>Café da manhã na casa</li><li>Seminário de encerramento</li><li>Foto oficial com os mestres</li><li>Almoço de despedida</li></ul>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
 
-<!-- ===================== 07 · A CASA ===================== -->
-<section id="casa">
-  <div class="wrap">
-    <div class="two casa-head">
-      <div class="reveal">
-        <p class="kicker"><span>07</span>A casa</p>
-        <h2>Uma casa extraordinária na Costa Verde.</h2>
+<!-- ===================== 07 · A CASA (galeria horizontal) ===================== -->
+<section id="casa" class="casa" data-hscroll>
+  <div class="casa-sticky">
+    <div class="wrap casa-head">
+      <div>
+        <p class="kicker reveal"><span>07</span>A casa</p>
+        <h2 data-split>Uma casa <em>extraordinária</em> na Costa Verde.</h2>
       </div>
-      <div class="stack reveal">
-        <p class="lead">Arquitetura contemporânea, piscina, áreas de convivência integradas e a natureza ao redor.</p>
-        <p>A BJJ'S HOUSE fica no exclusivo Condomínio Portobello, em Mangaratiba. Um ambiente pensado para que você treine, descanse e conviva no mesmo lugar, com conforto e lazer em cada detalhe.</p>
+      <div class="stack">
+        <p class="lead reveal">Arquitetura contemporânea, piscina, áreas de convivência integradas e a natureza ao redor.</p>
+        <p class="reveal">A BJJ'S HOUSE fica no exclusivo Condomínio Portobello, em Mangaratiba. Um ambiente pensado para que você treine, descanse e conviva no mesmo lugar.</p>
       </div>
     </div>
-    <div class="mosaic" data-gallery>
-      <button class="tile big" type="button" data-full="assets/img/casa-1.webp" aria-label="Ampliar foto: piscina e deck da casa">
-        <img src="assets/img/casa-1.webp" alt="Piscina com deck de madeira e espreguiçadeiras em frente à casa, cercada de mata" width="996" height="882" loading="lazy" decoding="async">
-        <svg class="ic zoom"><use href="#i-expand"/></svg>
-      </button>
-      <button class="tile" type="button" data-full="assets/img/casa-2.webp" aria-label="Ampliar foto: sala de estar">
-        <img src="assets/img/casa-2.webp" alt="Sala de estar com sofá verde, forro de madeira e grandes janelas" width="445" height="534" loading="lazy" decoding="async">
-        <svg class="ic zoom"><use href="#i-expand"/></svg>
-      </button>
-      <button class="tile" type="button" data-full="assets/img/casa-3.webp" aria-label="Ampliar foto: área da piscina">
-        <img src="assets/img/casa-3.webp" alt="Área da piscina com espreguiçadeiras e palmeiras diante da casa" width="445" height="534" loading="lazy" decoding="async">
-        <svg class="ic zoom"><use href="#i-expand"/></svg>
-      </button>
-      <button class="tile" type="button" data-full="assets/img/casa-4.webp" aria-label="Ampliar foto: varanda coberta">
-        <img src="assets/img/casa-4.webp" alt="Varanda coberta com forro de madeira, poltronas e vista para a mata" width="445" height="534" loading="lazy" decoding="async">
-        <svg class="ic zoom"><use href="#i-expand"/></svg>
-      </button>
-      <button class="tile" type="button" data-full="assets/img/casa-5.webp" aria-label="Ampliar foto: fachada e piscina">
-        <img src="assets/img/casa-5.webp" alt="Fachada da casa com piscina e jardim de palmeiras" width="445" height="534" loading="lazy" decoding="async">
-        <svg class="ic zoom"><use href="#i-expand"/></svg>
-      </button>
+    <div class="casa-viewport">
+      <div class="casa-track" data-gallery>
+        <button class="tile" type="button" data-full="assets/img/casa-1.webp" data-cursor="Ver">
+          <img src="assets/img/casa-1.webp" alt="Piscina com deck de madeira e espreguiçadeiras em frente à casa, cercada de mata" width="996" height="882" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>01</b>Piscina e deck</span>
+        </button>
+        <button class="tile" type="button" data-full="assets/img/casa-2.webp" data-cursor="Ver">
+          <img src="assets/img/casa-2.webp" alt="Sala de estar com sofá verde, forro de madeira e grandes janelas" width="445" height="534" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>02</b>Sala de estar</span>
+        </button>
+        <button class="tile" type="button" data-full="assets/img/hero-casa.webp" data-cursor="Ver">
+          <img src="assets/img/hero-casa.webp" alt="Fachada da casa iluminada ao entardecer, com jardim e palmeiras" width="1920" height="1166" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>03</b>Fachada ao entardecer</span>
+        </button>
+        <button class="tile" type="button" data-full="assets/img/casa-3.webp" data-cursor="Ver">
+          <img src="assets/img/casa-3.webp" alt="Área da piscina com espreguiçadeiras e palmeiras diante da casa" width="445" height="534" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>04</b>Área da piscina</span>
+        </button>
+        <button class="tile" type="button" data-full="assets/img/casa-4.webp" data-cursor="Ver">
+          <img src="assets/img/casa-4.webp" alt="Varanda coberta com forro de madeira, poltronas e vista para a mata" width="445" height="534" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>05</b>Varanda coberta</span>
+        </button>
+        <button class="tile" type="button" data-full="assets/img/casa-5.webp" data-cursor="Ver">
+          <img src="assets/img/casa-5.webp" alt="Fachada da casa com piscina e jardim de palmeiras" width="445" height="534" loading="lazy" decoding="async">
+          <span class="tile-cap"><b>06</b>Jardim e piscina</span>
+        </button>
+        <div class="casa-end">
+          <svg class="ic"><use href="#i-pin"/></svg>
+          <p class="ce-place">Condomínio Portobello<small>Mangaratiba · Costa Verde · RJ</small></p>
+          <p class="serif">Treinar, descansar e conviver no mesmo lugar.</p>
+          <a class="btn btn-navy" href="#ingressos"><span>Quero viver isso</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
     </div>
-    <p class="place"><svg class="ic"><use href="#i-pin"/></svg>Condomínio Portobello · Mangaratiba · Costa Verde · RJ</p>
+    <div class="wrap casa-foot">
+      <span class="casa-count" aria-hidden="true"><b data-casa-idx>01</b> / 06</span>
+      <span class="casa-progress" aria-hidden="true"><i></i></span>
+      <span class="casa-hint" aria-hidden="true">Role para explorar <svg class="ic"><use href="#i-arrow"/></svg></span>
+    </div>
   </div>
 </section>
 
 <!-- ===================== 08 · INGRESSOS ===================== -->
 <section class="cream" id="ingressos">
+  <span class="ghost-num" data-parallax="-0.12" aria-hidden="true">08</span>
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <p class="kicker"><span>08</span>Ingressos</p>
-      <h2>Escolha como você quer viver essa experiência.</h2>
-      <p class="meta">10 a 13 de dezembro · BJJ'S HOUSE · Condomínio Portobello, Mangaratiba · RJ</p>
-      <p class="limit">Vagas limitadas a 50 participantes por dia</p>
+    <div class="sec-head center">
+      <p class="kicker reveal"><span>08</span>Ingressos</p>
+      <h2 data-split>Escolha como você quer <em>viver</em> essa experiência.</h2>
+      <p class="meta reveal">10 a 13 de dezembro · BJJ'S HOUSE · Condomínio Portobello, Mangaratiba · RJ</p>
+      <p class="limit reveal"><span class="live-dot" aria-hidden="true"></span>Vagas limitadas a 50 participantes por dia</p>
     </div>
 
-    <article class="diamond reveal" id="diamond">
+    <article class="diamond reveal r-zoom" id="diamond">
       <div class="d-txt">
         <span class="selo">★ A imersão mais exclusiva · somente 4 vagas</span>
-        <h3>Diamond Experience</h3>
+        <h3>Diamond <span class="gold-grad">Experience</span></h3>
         <p class="serif d-tag">A experiência mais completa da BJJ'S HOUSE.</p>
         <p>Para quem deseja viver a experiência mais completa da BJJ'S HOUSE, com acesso à programação especial, aulas particulares e experiências exclusivas com grandes nomes do Jiu-Jitsu.</p>
-        <ul class="ticks">
+        <ul class="ticks stagger">
           <li>Camp completo de 3 dias + dia extra exclusivo (10/12)</li>
           <li>Hospedagem de 3 noites na BJJ'S HOUSE (quarto duplo)</li>
           <li>Aula particular com Fernando Tererê e Tainan Dalpra</li>
@@ -453,50 +527,50 @@
         <div class="vagas" data-vagas="diamond" data-total="4" hidden><span class="vagas-txt"></span><span class="bar"><i></i></span></div>
         <div class="price-row">
           <div class="price"><small>Investimento · por pessoa</small><strong>R$ 15.000</strong><em data-parcelas hidden></em></div>
-          <a class="btn btn-gold btn-lg" data-buy="diamond" href="#contato">Quero a Diamond Experience</a>
+          <a class="btn btn-gold btn-lg" data-buy="diamond" href="#contato" data-magnetic><span>Quero a Diamond Experience</span></a>
         </div>
       </div>
       <figure class="d-img">
-        <img src="assets/img/diamond.webp" alt="Dois atletas de Jiu-Jitsu em treino, um de kimono branco e outro de kimono preto" width="655" height="834" loading="lazy" decoding="async">
+        <div class="pi" data-pimg><img src="assets/img/diamond.webp" alt="Dois atletas de Jiu-Jitsu em treino, um de kimono branco e outro de kimono preto" width="655" height="834" loading="lazy" decoding="async"></div>
         <figcaption>Quinta · 10/12 · Dia extra exclusivo</figcaption>
       </figure>
     </article>
 
-    <p class="others" id="planos">Outras formas de participar</p>
+    <p class="others reveal" id="planos">Outras formas de participar</p>
     <div class="planos">
-      <article class="plano reveal">
+      <article class="plano reveal" data-spot>
         <span class="p-tag">Camp completo + hotel</span>
         <h3>Gold Immersion</h3>
         <span class="serif">Imersão completa · Hotel Plaza</span>
         <ul class="ticks"><li>Camp completo de 3 dias</li><li>Acesso à BJJ'S HOUSE (9h às 21h)</li><li>Todas as refeições incluídas, exceto bebida alcoólica</li><li>Hospedagem no Hotel Plaza</li></ul>
         <div class="vagas" data-vagas="gold" hidden><span class="vagas-txt"></span></div>
-        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 5.000</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="gold" href="#contato">Garantir Gold</a></div>
+        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 5.000</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="gold" href="#contato"><span>Garantir Gold</span></a></div>
       </article>
-      <article class="plano reveal">
+      <article class="plano reveal" data-spot>
         <span class="p-tag">Camp completo + pousada</span>
         <h3>Silver Immersion</h3>
         <span class="serif">Imersão completa · Pousada Vó Irene</span>
         <ul class="ticks"><li>Camp completo de 3 dias</li><li>Acesso à BJJ'S HOUSE (9h às 21h)</li><li>Todas as refeições incluídas, exceto bebida alcoólica</li><li>Hospedagem na Pousada Vó Irene</li></ul>
         <div class="vagas" data-vagas="silver" hidden><span class="vagas-txt"></span></div>
-        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 4.600</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="silver" href="#contato">Garantir Silver</a></div>
+        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 4.600</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="silver" href="#contato"><span>Garantir Silver</span></a></div>
       </article>
-      <article class="plano reveal">
+      <article class="plano reveal" data-spot>
         <span class="p-tag">1 dia de camp</span>
         <h3>BJJ'S Day Experience</h3>
         <span class="serif">Day Pass · Escolha seu dia</span>
         <ul class="ticks"><li>Camp de 1 dia</li><li>Acesso à BJJ'S HOUSE (9h às 21h)</li><li>Todas as refeições incluídas, exceto bebida alcoólica</li><li class="no">Não inclui hospedagem</li></ul>
         <div class="daypass">
-          <div class="price-row"><div class="price"><small>Sexta-feira · 11/12</small><strong>R$ 1.200</strong></div><a class="btn btn-navy" data-buy="sexta" href="#contato">Garantir sexta</a></div>
-          <div class="price-row"><div class="price"><small>Sábado · 12/12</small><strong>R$ 1.600</strong></div><a class="btn btn-navy" data-buy="sabado" href="#contato">Garantir sábado</a></div>
-          <div class="price-row"><div class="price"><small>Domingo · 13/12</small><strong>R$ 1.400</strong></div><a class="btn btn-navy" data-buy="domingo" href="#contato">Garantir domingo</a></div>
+          <div class="price-row"><div class="price"><small>Sexta-feira · 11/12</small><strong>R$ 1.200</strong></div><a class="btn btn-navy" data-buy="sexta" href="#contato"><span>Garantir sexta</span></a></div>
+          <div class="price-row"><div class="price"><small>Sábado · 12/12</small><strong>R$ 1.600</strong></div><a class="btn btn-navy" data-buy="sabado" href="#contato"><span>Garantir sábado</span></a></div>
+          <div class="price-row"><div class="price"><small>Domingo · 13/12</small><strong>R$ 1.400</strong></div><a class="btn btn-navy" data-buy="domingo" href="#contato"><span>Garantir domingo</span></a></div>
         </div>
       </article>
-      <article class="plano reveal">
+      <article class="plano reveal" data-spot>
         <span class="p-tag">Acompanhantes</span>
         <h3>BJJ'S HOUSE Guest</h3>
         <span class="serif">Para quem vem junto, sem treinar</span>
         <ul class="ticks"><li class="no">Não inclui camp</li><li>Acesso à BJJ'S HOUSE (9h às 21h)</li><li>Todas as refeições incluídas, exceto bebida alcoólica</li><li class="no">Não inclui hospedagem</li></ul>
-        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 500</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="guest" href="#contato">Garantir acesso</a></div>
+        <div class="price-row"><div class="price"><small>Por pessoa</small><strong>R$ 500</strong><em data-parcelas hidden></em></div><a class="btn btn-navy" data-buy="guest" href="#contato"><span>Garantir acesso</span></a></div>
       </article>
     </div>
 
@@ -520,24 +594,24 @@
       </div>
     </details>
 
-    <ul class="trust reveal">
+    <ul class="trust stagger reveal">
       <li><svg class="ic"><use href="#i-users"/></svg><span><b>Vagas limitadas</b>50 participantes por dia</span></li>
       <li><svg class="ic"><use href="#i-food"/></svg><span><b>Refeições inclusas</b>Em todos os planos</span></li>
       <li><svg class="ic"><use href="#i-doc"/></svg><span><b>Programação completa</b>Enviada a todos os inscritos</span></li>
       <li><svg class="ic"><use href="#i-chat"/></svg><span><b>Atendimento humano</b>Tire suas dúvidas com a nossa equipe</span></li>
     </ul>
-    <p class="fine">Todos os planos incluem as refeições previstas na programação, exceto bebidas alcoólicas. A hospedagem está incluída somente nos planos Diamond, Gold e Silver. Valores por pessoa.</p>
+    <p class="fine reveal">Todos os planos incluem as refeições previstas na programação, exceto bebidas alcoólicas. A hospedagem está incluída somente nos planos Diamond, Gold e Silver. Valores por pessoa.</p>
   </div>
 </section>
 
 <!-- ===================== 09 · COMO FUNCIONA ===================== -->
 <section id="como-funciona">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <p class="kicker"><span>09</span>Como garantir sua vaga</p>
-      <h2>Quatro passos até a BJJ'S HOUSE.</h2>
+    <div class="sec-head center">
+      <p class="kicker reveal"><span>09</span>Como garantir sua vaga</p>
+      <h2 data-split>Quatro passos até a <em>sua vaga.</em></h2>
     </div>
-    <ol class="steps">
+    <ol class="steps" data-progress>
       <li class="reveal"><span class="sn">1</span><div><h3>Escolha sua experiência</h3><p>Diamond, Gold, Silver, Day Experience ou Guest. Compare os planos e escolha o seu.</p></div></li>
       <li class="reveal"><span class="sn">2</span><div><h3>Finalize sua inscrição</h3><p>Clique no botão do plano e conclua o pagamento, ou fale com a nossa equipe pelo WhatsApp.</p></div></li>
       <li class="reveal"><span class="sn">3</span><div><h3>Receba as informações</h3><p>Após a confirmação, você recebe a programação com horários, o endereço completo e as orientações de chegada.</p></div></li>
@@ -547,11 +621,11 @@
 </section>
 
 <!-- ===================== DEPOIMENTOS (aparece só se houver itens no config.js) ===================== -->
-<section class="dark" id="depoimentos" hidden>
+<section class="dark grain" id="depoimentos" hidden>
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <p class="kicker">Quem já viveu</p>
-      <h2>O que dizem os participantes.</h2>
+    <div class="sec-head center">
+      <p class="kicker reveal">Quem já viveu</p>
+      <h2 data-split>O que dizem os <em>participantes.</em></h2>
     </div>
     <div class="testis" data-testis></div>
   </div>
@@ -561,50 +635,51 @@
 <section class="cream" id="duvidas">
   <div class="wrap faq-layout">
     <div class="faq-side">
-      <div class="sec-head reveal">
-        <p class="kicker"><span>10</span>Dúvidas frequentes</p>
-        <h2>Tudo o que você precisa saber antes de garantir sua vaga.</h2>
+      <div class="sec-head">
+        <p class="kicker reveal"><span>10</span>Dúvidas frequentes</p>
+        <h2 data-split>Tudo o que você precisa saber antes de <em>garantir sua vaga.</em></h2>
       </div>
       <div class="faq-more reveal">
         <p>Ainda tem alguma dúvida? Fale direto com a nossa equipe.</p>
-        <a class="btn btn-wa" data-wa href="#contato"><svg class="ic"><use href="#i-wa"/></svg>Falar no WhatsApp</a>
+        <a class="btn btn-wa" data-wa href="#contato"><svg class="ic"><use href="#i-wa"/></svg><span>Falar no WhatsApp</span></a>
       </div>
     </div>
-    <div class="faq">
-      <details open><summary>Preciso ser faixa-preta para participar?</summary><p>Não. O camp é aberto a praticantes de todas as faixas. Os seminários são conduzidos para que cada atleta aproveite no seu nível.</p></details>
-      <details><summary>O que está incluído no meu ingresso?</summary><p>Depende do plano: camp, acesso à BJJ'S HOUSE das 9h às 21h, refeições (exceto bebida alcoólica) e, nos planos Diamond, Gold e Silver, hospedagem. Os detalhes de cada plano estão na seção <a href="#ingressos">Ingressos</a>.</p></details>
-      <details><summary>Qual a diferença entre os planos?</summary><p>A <strong>Diamond Experience</strong> é a imersão mais completa: inclui o dia extra exclusivo (10/12), aula particular e jantar com os mestres e hospedagem de 3 noites na própria BJJ'S HOUSE. <strong>Gold</strong> e <strong>Silver</strong> incluem o camp completo de 3 dias, com hospedagem no Hotel Plaza (Gold) ou na Pousada Vó Irene (Silver). O <strong>Day Experience</strong> é o camp de um dia, sem hospedagem, e o <strong>Guest</strong> é para acompanhantes que não vão treinar.</p></details>
-      <details><summary>Posso participar de apenas um dia?</summary><p>Sim. Com o BJJ'S Day Experience você escolhe o dia: sexta (11/12), sábado (12/12) ou domingo (13/12). Inclui o camp do dia, acesso à casa das 9h às 21h e as refeições.</p></details>
-      <details><summary>O que eu preciso levar?</summary><p>Kimono, roupa de treino sem kimono, roupa de banho para a piscina e seus itens de uso pessoal.</p></details>
-      <details><summary>Posso levar um acompanhante?</summary><p>Sim. O passe BJJ'S HOUSE Guest dá acesso à casa e a todas as refeições, sem participar do camp.</p></details>
-      <details><summary>As bebidas estão incluídas?</summary><p>Todas as refeições previstas na programação estão incluídas. Bebidas alcoólicas não estão incluídas em nenhum plano.</p></details>
-      <details><summary>Onde fica a BJJ'S HOUSE?</summary><p>No Condomínio Portobello, em Mangaratiba, na Costa Verde do Rio de Janeiro. O endereço completo e as orientações de chegada são enviados após a confirmação da inscrição.</p></details>
-      <details><summary>Quantas vagas existem?</summary><p>As vagas são limitadas a 50 participantes por dia de camp. A Diamond Experience tem somente 4 vagas.</p></details>
-      <details><summary>Quais são as formas de pagamento?</summary><p>Fale com a nossa equipe pelo WhatsApp para conhecer as formas de pagamento, as condições de parcelamento e a política de cancelamento.</p></details>
+    <div class="faq stagger reveal">
+      <details open><summary>Preciso ser faixa-preta para participar?</summary><div class="faq-a"><p>Não. O camp é aberto a praticantes de todas as faixas. Os seminários são conduzidos para que cada atleta aproveite no seu nível.</p></div></details>
+      <details><summary>O que está incluído no meu ingresso?</summary><div class="faq-a"><p>Depende do plano: camp, acesso à BJJ'S HOUSE das 9h às 21h, refeições (exceto bebida alcoólica) e, nos planos Diamond, Gold e Silver, hospedagem. Os detalhes de cada plano estão na seção <a href="#ingressos">Ingressos</a>.</p></div></details>
+      <details><summary>Qual a diferença entre os planos?</summary><div class="faq-a"><p>A <strong>Diamond Experience</strong> é a imersão mais completa: inclui o dia extra exclusivo (10/12), aula particular e jantar com os mestres e hospedagem de 3 noites na própria BJJ'S HOUSE. <strong>Gold</strong> e <strong>Silver</strong> incluem o camp completo de 3 dias, com hospedagem no Hotel Plaza (Gold) ou na Pousada Vó Irene (Silver). O <strong>Day Experience</strong> é o camp de um dia, sem hospedagem, e o <strong>Guest</strong> é para acompanhantes que não vão treinar.</p></div></details>
+      <details><summary>Posso participar de apenas um dia?</summary><div class="faq-a"><p>Sim. Com o BJJ'S Day Experience você escolhe o dia: sexta (11/12), sábado (12/12) ou domingo (13/12). Inclui o camp do dia, acesso à casa das 9h às 21h e as refeições.</p></div></details>
+      <details><summary>O que eu preciso levar?</summary><div class="faq-a"><p>Kimono, roupa de treino sem kimono, roupa de banho para a piscina e seus itens de uso pessoal.</p></div></details>
+      <details><summary>Posso levar um acompanhante?</summary><div class="faq-a"><p>Sim. O passe BJJ'S HOUSE Guest dá acesso à casa e a todas as refeições, sem participar do camp.</p></div></details>
+      <details><summary>As bebidas estão incluídas?</summary><div class="faq-a"><p>Todas as refeições previstas na programação estão incluídas. Bebidas alcoólicas não estão incluídas em nenhum plano.</p></div></details>
+      <details><summary>Onde fica a BJJ'S HOUSE?</summary><div class="faq-a"><p>No Condomínio Portobello, em Mangaratiba, na Costa Verde do Rio de Janeiro. O endereço completo e as orientações de chegada são enviados após a confirmação da inscrição.</p></div></details>
+      <details><summary>Quantas vagas existem?</summary><div class="faq-a"><p>As vagas são limitadas a 50 participantes por dia de camp. A Diamond Experience tem somente 4 vagas.</p></div></details>
+      <details><summary>Quais são as formas de pagamento?</summary><div class="faq-a"><p>Fale com a nossa equipe pelo WhatsApp para conhecer as formas de pagamento, as condições de parcelamento e a política de cancelamento.</p></div></details>
     </div>
   </div>
 </section>
 
 <!-- ===================== CTA FINAL ===================== -->
-<section class="final">
-  <img class="final-bg" src="assets/img/cta-bg.webp" alt="" width="1600" height="929" loading="lazy" decoding="async">
-  <div class="wrap final-in reveal">
-    <p class="kicker light">Sua próxima evolução</p>
-    <h2>Sua próxima evolução pode começar aqui.</h2>
-    <p>Existem experiências que passam. E existem aquelas que ampliam nossa visão, renovam nossa motivação e nos fazem voltar para casa com novas referências, novos contatos e ainda mais vontade de evoluir.</p>
-    <p>A BJJ'S HOUSE foi criada para quem entende que o Jiu-Jitsu é muito mais do que uma luta: é aprendizado contínuo, disciplina, superação e conexão entre pessoas.</p>
-    <p class="serif">Garanta sua participação e prepare-se para viver o Jiu-Jitsu muito além do tatame.</p>
-    <div class="cd cd-final" role="timer" aria-label="Contagem regressiva para o início do camp" data-countdown data-countdown-wrap>
+<section class="final grain">
+  <div class="final-bg" data-parallax="0.12" aria-hidden="true"><img src="assets/img/cta-bg.webp" alt="" width="1600" height="929" loading="lazy" decoding="async"></div>
+  <canvas class="particles" data-particles aria-hidden="true"></canvas>
+  <div class="wrap final-in">
+    <p class="kicker light reveal">Sua próxima evolução</p>
+    <h2 data-split>Sua próxima evolução pode <em>começar aqui.</em></h2>
+    <p class="reveal">Existem experiências que passam. E existem aquelas que ampliam nossa visão, renovam nossa motivação e nos fazem voltar para casa com novas referências, novos contatos e ainda mais vontade de evoluir.</p>
+    <p class="reveal">A BJJ'S HOUSE foi criada para quem entende que o Jiu-Jitsu é muito mais do que uma luta: é aprendizado contínuo, disciplina, superação e conexão entre pessoas.</p>
+    <p class="serif reveal">Garanta sua participação e prepare-se para viver o Jiu-Jitsu muito além do tatame.</p>
+    <div class="cd cd-final reveal" role="timer" aria-label="Contagem regressiva para o início do camp" data-countdown data-countdown-wrap>
       <div><b data-cd="d">--</b><small>dias</small></div>
       <div><b data-cd="h">--</b><small>horas</small></div>
       <div><b data-cd="m">--</b><small>min</small></div>
       <div><b data-cd="s">--</b><small>seg</small></div>
     </div>
-    <div class="btns center">
-      <a class="btn btn-gold btn-lg" href="#ingressos">Garantir minha vaga <svg class="ic"><use href="#i-arrow"/></svg></a>
-      <a class="btn btn-line btn-lg" data-buy="diamond" href="#diamond">Quero a Diamond Experience</a>
+    <div class="btns center reveal">
+      <a class="btn btn-gold btn-lg glow" href="#ingressos" data-magnetic><span>Garantir minha vaga</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-line btn-lg" data-buy="diamond" href="#diamond" data-magnetic><span>Quero a Diamond Experience</span></a>
     </div>
-    <p class="final-note">Vagas limitadas a 50 participantes por dia · Diamond: somente 4 vagas</p>
+    <p class="final-note reveal">Vagas limitadas a 50 participantes por dia · Diamond: somente 4 vagas</p>
   </div>
 </section>
 </main>
@@ -613,23 +688,24 @@
 <footer id="contato">
   <div class="wrap">
     <div class="foot">
-      <div>
+      <div class="reveal r-left">
         <img class="foot-logo" src="assets/img/logo.webp" alt="BJJ'S HOUSE · Exclusive Event" width="124" height="124" loading="lazy">
         <h3>BJJ'S HOUSE · Muito além do tatame.</h3>
         <p class="serif">Um lugar para conectar pessoas, paixão e oportunidades.</p>
         <div class="addr"><small>Endereço</small><p data-addr>Condomínio Portobello · Mangaratiba · RJ</p></div>
         <div class="addr"><small>Data</small><p>10 a 13 de dezembro · quinta a domingo</p></div>
         <div class="contact-btns">
-          <a class="btn btn-wa" data-wa href="#contato"><svg class="ic"><use href="#i-wa"/></svg>Fale conosco no WhatsApp</a>
+          <a class="btn btn-wa" data-wa href="#contato"><svg class="ic"><use href="#i-wa"/></svg><span>Fale conosco no WhatsApp</span></a>
           <a class="btn btn-line" data-insta href="#" hidden><svg class="ic"><use href="#i-insta"/></svg><span>Instagram</span></a>
           <a class="btn btn-line" data-email href="#" hidden><svg class="ic"><use href="#i-mail"/></svg><span>E-mail</span></a>
         </div>
       </div>
-      <div class="mapbox">
+      <div class="mapbox reveal r-right">
         <iframe data-map title="Mapa: Condomínio Portobello, Mangaratiba · RJ" src="https://maps.google.com/maps?q=Condom%C3%ADnio%20Portobello%2C%20Mangaratiba%20RJ&z=13&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <a class="maplink" data-maplink href="https://www.google.com/maps/search/?api=1&query=Condom%C3%ADnio+Portobello+Mangaratiba+RJ" target="_blank" rel="noopener">Abrir no Google Maps ↗</a>
       </div>
     </div>
+    <p class="foot-giant" aria-hidden="true" data-split-chars>BJJ'S HOUSE</p>
     <div class="copy-r">
       <p>© <span data-year>2026</span> BJJ'S HOUSE · Todos os direitos reservados</p>
       <a href="#topo">Voltar ao topo ↑</a>
@@ -640,11 +716,17 @@
 <!-- Barra fixa (mobile) -->
 <div class="mbar" aria-label="Comprar ingresso">
   <div><small>A partir de</small><strong>R$ 500</strong></div>
-  <a class="btn btn-gold" href="#ingressos">Garantir minha vaga</a>
+  <a class="btn btn-gold" href="#ingressos"><span>Garantir minha vaga</span></a>
 </div>
 
 <!-- WhatsApp flutuante -->
 <a class="wa-float" data-wa href="#contato" aria-label="Falar no WhatsApp" hidden><svg><use href="#i-wa"/></svg></a>
+
+<!-- Voltar ao topo (desktop) -->
+<a class="to-top" href="#topo" aria-label="Voltar ao topo">
+  <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" pathLength="1"/></svg>
+  <svg class="ic"><use href="#i-up"/></svg>
+</a>
 
 <!-- Galeria ampliada -->
 <dialog class="lb" aria-label="Galeria de fotos da casa">
@@ -654,7 +736,5 @@
   <button class="lb-nav lb-next" type="button" aria-label="Próxima foto"><svg class="ic"><use href="#i-chev-r"/></svg></button>
 </dialog>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
 </body>
 </html>

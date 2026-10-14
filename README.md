@@ -41,6 +41,23 @@ robots.txt / sitemap.xml   SEO
 15. **Rodapé** com contato e mapa
 16. **Barra fixa de compra** no celular e **botão flutuante do WhatsApp**
 
+### Efeitos visuais
+
+- **Intro animada** com o logo (só na primeira visita da sessão) e entrada do hero letra por letra
+- **Parallax** no fundo do hero, nas fotos e nos números gigantes decorativos; leve movimento com o mouse
+- **Partículas douradas** no hero e no CTA final, textura de granulação nas seções escuras
+- **Faixas em movimento** que aceleram e invertem de direção conforme a rolagem
+- **Títulos revelados palavra por palavra** e fotos reveladas com efeito de cortina
+- **Galeria da casa horizontal**: no computador a seção fica fixa e as fotos deslizam com a rolagem; no celular, deslize com o dedo
+- **Linha do tempo** da programação e dos passos que se preenche ao rolar
+- **Contadores animados** (títulos dos mestres, vagas) e contagem regressiva com animação
+- **Cards 3D** com brilho que segue o mouse, **botões magnéticos** e com reflexo, **cursor personalizado**
+- **Rolagem suave** no computador, cabeçalho que some ao descer e volta ao subir, barra de progresso e botão "voltar ao topo"
+- Borda dourada animada no Diamond, FAQ com abertura suave, galeria ampliada com setas e gesto de deslizar
+
+Tudo sem bibliotecas externas e respeitando a opção do sistema "reduzir movimento"
+(quem ativa vê a página completa, sem animações).
+
 Também inclui: SEO (title, description, dados estruturados de Evento e FAQ para o Google),
 imagem de compartilhamento para WhatsApp/Instagram/Facebook, favicon, acessibilidade
 (navegação por teclado, contraste, textos alternativos) e respeito à preferência de
