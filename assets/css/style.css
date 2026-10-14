@@ -181,20 +181,19 @@ section{padding-block:120px;position:relative}
   linear-gradient(180deg,rgba(14,21,38,.55) 0%,rgba(14,21,38,0) 22%,rgba(14,21,38,0) 58%,#0e1526 100%),
   linear-gradient(90deg,rgba(14,21,38,.95) 0%,rgba(14,21,38,.78) 40%,rgba(14,21,38,.2) 100%)}
 .particles{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 384px;gap:56px;align-items:end;padding-top:calc(var(--annc-h) + 150px);padding-bottom:60px;will-change:transform,opacity}
+.hero-grid{width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:56px;align-items:end;padding-top:calc(var(--annc-h) + 150px);padding-bottom:60px;will-change:transform,opacity}
 .hero-text{display:flex;flex-direction:column;min-width:0}
 .hero-date{font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
 .hero h1{font-size:clamp(78px,11.6vw,160px);line-height:.84}
 .h1-brand{display:block}
 .h1w{display:inline-block;overflow:hidden;vertical-align:top;padding:.06em .02em 0;margin:-.06em -.02em 0}
 .h1w .ch{display:inline-block}
-.hero-what{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,3vw,44px);line-height:1.04;letter-spacing:.02em;margin-top:20px;max-width:24em}
-.hero-what b{font-weight:400;color:var(--gold-lt);white-space:nowrap}
-.hero .tag{font-size:clamp(24px,2.6vw,34px);margin-top:12px;line-height:1.15}
+.hero .tag{font-size:clamp(24px,2.6vw,34px);margin-top:16px;line-height:1.2;max-width:30ch}
 .shimmer,.gold-grad{background:linear-gradient(100deg,var(--gold) 0%,#f6dc9c 22%,var(--gold) 44%,#b8862f 70%,var(--gold) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradMove 7s linear infinite}
 @keyframes gradMove{from{background-position:0% 0}to{background-position:-220% 0}}
 .hero .sub{font-weight:500;font-size:clamp(17px,1.7vw,20px);line-height:1.55;margin-top:18px;max-width:40ch}
 .hero .sub strong{color:var(--gold-lt);font-weight:600}
+.nobr{white-space:nowrap}
 .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .btns.center{justify-content:center}
 .seal{display:inline-flex;align-self:flex-start;align-items:center;gap:10px;margin-top:26px;font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
@@ -471,6 +470,7 @@ blockquote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
 .p-tag{align-self:flex-start;font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-tx);border:1px solid rgba(138,100,32,.4);padding:6px 11px;margin-bottom:8px}
 .plano h3{font-size:46px}
 .plano .serif{color:var(--gold-tx);font-size:20px}
+.p-desc{font-size:14.5px;line-height:1.6;opacity:.82;margin:6px 0 10px}
 .plano .ticks{flex:1;margin-bottom:18px}
 .plano .ticks li.no{opacity:.6}
 .plano .ticks li.no::before{background:transparent;border:1px solid var(--gold-tx)}
@@ -481,7 +481,6 @@ blockquote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
 .daypass .price-row{border-top:0;margin-top:0;padding-block:14px;border-bottom:1px solid var(--line-lt);align-items:center}
 .daypass .price-row:last-child{border-bottom:0;padding-bottom:0}
 .daypass .price strong{font-size:36px}
-.dp-inc{display:block;max-width:30ch;margin-top:6px;font-size:12.5px;line-height:1.4;opacity:.72}
 .daypass .btn{min-width:210px}
 
 .compare{margin-top:44px;border:1px solid var(--line-lt);background:var(--paper)}
@@ -630,7 +629,6 @@ footer{background:var(--navy);color:var(--paper);padding-block:96px 40px;border-
 @media (max-width:1080px){
   .menu{gap:16px}
   .nav-cta{padding:12px 16px}
-  .hero-grid{grid-template-columns:minmax(0,1fr) 340px;gap:36px}
   .scroll-cue{display:none}
 }
 @media (max-width:1000px){
@@ -695,7 +693,6 @@ footer{background:var(--navy);color:var(--paper);padding-block:96px 40px;border-
   .hero-bg img{animation:none;object-position:60% 50%}
   .hero-shade{background:url("../img/grain.png"),linear-gradient(180deg,rgba(14,21,38,.6) 0,rgba(14,21,38,0) 120px)}
   .hero-grid{padding-top:max(calc(var(--annc-h) + 130px),calc(80vw - 40px))}
-  .hero-what{font-size:clamp(26px,7.4vw,34px);margin-top:16px}
   .hero .btns .btn{flex:1 1 100%}
   .hero-card{padding:22px}
   .cd b{font-size:34px}

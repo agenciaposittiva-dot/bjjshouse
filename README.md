@@ -24,22 +24,24 @@ robots.txt / sitemap.xml   SEO
 
 ## Seções da página
 
-1. **Topo** com faixa de anúncio, contagem regressiva e menu (com menu mobile)
-2. **Hero** com chamada principal, mestres, contador e CTA
-3. **A experiência** e os três pilares (Aprender · Conviver · Viver)
+1. **Topo** com faixa de anúncio e menu (com menu mobile)
+2. **Hero** com título, chamada e o botão "Conhecer a experiência"
+3. **A experiência**
 4. **Os mestres** (autoridade): Fernando Tererê e Tainan Dalpra
 5. **A convivência**
 6. **O que você vai viver** (benefícios)
 7. **Para quem é / para quem não é**
-8. **Programação** dos 4 dias
-9. **A casa**: galeria com fotos ampliáveis
-10. **Ingressos**: Diamond em destaque, Gold, Silver, Day Experience, Guest e **tabela comparativa**
-11. **Como garantir sua vaga** (4 passos)
-12. **Depoimentos** (aparece só quando você cadastrar)
-13. **Dúvidas frequentes**
-14. **CTA final** com contagem regressiva
-15. **Rodapé** com contato e mapa
-16. **Barra fixa de compra** no celular e **botão flutuante do WhatsApp**
+8. **A casa**: galeria com fotos ampliáveis
+9. **Ingressos**: Diamond em destaque, Gold, Silver, Day Experience, Guest e **tabela comparativa**
+10. **Como garantir sua vaga** (4 passos)
+11. **Depoimentos** (aparece só quando você cadastrar)
+12. **Dúvidas frequentes**
+13. **CTA final**
+14. **Rodapé** com contato e mapa
+15. **Barra fixa de compra** no celular e **botão flutuante do WhatsApp**
+
+Os textos de experiência, mestres, convivência, ingressos, CTA final e rodapé seguem o documento
+de copy do cliente, palavra por palavra (os preços são os da página).
 
 ### Efeitos visuais
 
@@ -50,8 +52,8 @@ robots.txt / sitemap.xml   SEO
 - **Faixas em movimento** que aceleram e invertem de direção conforme a rolagem
 - **Títulos revelados palavra por palavra** e fotos reveladas com efeito de cortina
 - **Galeria da casa horizontal**: no computador a seção fica fixa e as fotos deslizam com a rolagem; no celular, deslize com o dedo
-- **Linha do tempo** da programação e dos passos que se preenche ao rolar
-- **Contadores animados** (títulos dos mestres, vagas) e contagem regressiva com animação
+- **Linha do tempo** dos passos que se preenche ao rolar
+- **Contadores animados** nos títulos dos mestres
 - **Cards 3D** com brilho que segue o mouse, **botões magnéticos** e com reflexo, **cursor personalizado**
 - **Rolagem suave** no computador, cabeçalho que some ao descer e volta ao subir, barra de progresso e botão "voltar ao topo"
 - Borda dourada animada no Diamond, FAQ com abertura suave, galeria ampliada com setas e gesto de deslizar
@@ -81,7 +83,7 @@ Abra **`assets/js/config.js`** e preencha:
 | `instagram`, `email` | Contatos exibidos no rodapé | `"bjjshouse"`, `"contato@..."` |
 | `metaPixelId`, `ga4Id` | Rastreamento de anúncios (Meta) e Google Analytics | `"1234567890"`, `"G-XXXX"` |
 | `depoimentos` | Depoimentos reais de participantes | ver exemplo no arquivo |
-| `dataEvento` | Data/hora de início (contagem regressiva) | `"2026-12-10T09:00:00-03:00"` |
+| `dataEvento` | Data/hora de início (hoje sem uso visível: a contagem regressiva foi removida) | `"2026-12-10T09:00:00-03:00"` |
 
 ### Como os botões funcionam
 
@@ -90,9 +92,8 @@ cada um com uma mensagem pronta:
 
 | Botão | Mensagem enviada |
 |---|---|
-| Garantir minha vaga (topo, hero, menu, CTA final, barra do celular) | *Olá! Quero garantir minha vaga no Camp da BJJ'S HOUSE (10 a 13/12). Pode me passar as opções?* |
-| Conhecer a experiência | *Olá! Quero conhecer melhor a experiência da BJJ'S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra.* |
-| Camp a partir de R$ 1.200 (cartão do topo) | *Olá! Quero saber sobre os ingressos do Camp da BJJ'S HOUSE (10 a 13/12).* |
+| Garantir minha vaga (menu, CTA final, barra do celular) | *Olá! Quero garantir minha vaga no Camp da BJJ'S HOUSE (10 a 13/12). Pode me passar as opções?* |
+| Conhecer a experiência (topo) | *Olá! Quero conhecer melhor a experiência da BJJ'S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra.* |
 | Quero fazer parte | *Olá! Quero fazer parte da BJJ'S HOUSE (10 a 13/12). Como faço para garantir minha vaga?* |
 | Quero viver isso (galeria da casa) | *Olá! Vi as fotos da casa e quero viver essa experiência na BJJ'S HOUSE (10 a 13/12).* |
 | Botões de cada plano (Diamond, Gold, Silver, sexta, sábado, domingo, Guest) | *Olá! Quero garantir minha vaga no plano [nome do plano] do Camp BJJ'S HOUSE (10 a 13/12).* |
