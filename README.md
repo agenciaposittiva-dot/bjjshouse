@@ -33,7 +33,7 @@ robots.txt / sitemap.xml   SEO
 6. **O que você vai viver** (benefícios)
 7. **Para quem é / para quem não é**
 8. **A casa**: galeria com fotos ampliáveis
-9. **Ingressos**: Diamond em destaque, Gold, Silver, Day Experience, Guest e **tabela comparativa**
+9. **Ingressos**: Plano Diamante em destaque, Ouro, Prata e Bronze (camp completo), Day Pass Full, Day Pass Half, Acompanhantes e **tabela comparativa**
 10. **Como garantir sua vaga** (4 passos)
 11. **Depoimentos** (aparece só quando você cadastrar)
 12. **Dúvidas frequentes**
@@ -57,7 +57,7 @@ de copy do cliente, palavra por palavra (os preços são os da página).
 - **Contadores animados** nos títulos dos mestres
 - **Cards 3D** com brilho que segue o mouse, **botões magnéticos** e com reflexo, **cursor personalizado**
 - **Rolagem suave** no computador, cabeçalho que some ao descer e volta ao subir, barra de progresso e botão "voltar ao topo"
-- Borda dourada animada no Diamond, FAQ com abertura suave, galeria ampliada com setas e gesto de deslizar
+- Borda dourada animada no Plano Diamante, FAQ com abertura suave, galeria ampliada com setas e gesto de deslizar
 
 Tudo sem bibliotecas externas e respeitando a opção do sistema "reduzir movimento"
 (quem ativa vê a página completa, sem animações).
@@ -77,9 +77,9 @@ Abra **`assets/js/config.js`** e preencha:
 |---|---|---|
 | `whatsapp` | Número da equipe com DDI + DDD, só números (atual: +55 21 99315-0109) | `"5521993150109"` |
 | `botoesParaWhatsapp` | `true`: **todos os botões abrem o WhatsApp** (padrão atual). `false`: botões de plano usam o checkout | `true` |
-| `checkout.diamond`, `gold`, `silver`, `sexta`, `sabado`, `domingo`, `guest` | Link de pagamento de cada plano (usado só com `botoesParaWhatsapp: false`) | `"https://pay.kiwify.com.br/xxxx"` |
+| `checkout.diamante`, `ouro`, `prata`, `bronze`, `dayfull`, `dayhalf`, `acompanhantes` | Link de pagamento de cada plano (usado só com `botoesParaWhatsapp: false`) | `"https://pay.kiwify.com.br/xxxx"` |
 | `parcelamento` | Texto exibido abaixo dos preços | `"em até 12x no cartão"` |
-| `vagasRestantes` | Mostra "Restam X vagas" (use `0` para marcar como esgotado) | `{ diamond: 2, gold: null, silver: null }` |
+| `vagasRestantes` | Mostra "Restam X vagas" (use `0` para marcar como esgotado) | `{ diamante: 1, ouro: null, prata: null, bronze: null }` |
 | `endereco` | Endereço completo (atualiza rodapé e mapa) | `"Rua X, 123 · Portobello · Mangaratiba · RJ"` |
 | `instagram`, `email` | Contatos exibidos no rodapé | `"bjjshouse"`, `"contato@..."` |
 | `metaPixelId`, `ga4Id` | Rastreamento de anúncios (Meta) e Google Analytics | `"1234567890"`, `"G-XXXX"` |
@@ -97,13 +97,13 @@ cada um com uma mensagem pronta:
 | Conhecer a experiência (topo) | *Olá! Quero conhecer melhor a experiência da BJJ'S HOUSE (10 a 13/12) com Fernando Tererê e Tainan Dalpra.* |
 | Quero fazer parte | *Olá! Quero fazer parte da BJJ'S HOUSE (10 a 13/12). Como faço para garantir minha vaga?* |
 | Quero viver isso (galeria da casa) | *Olá! Vi as fotos da casa e quero viver essa experiência na BJJ'S HOUSE (10 a 13/12).* |
-| Botões de cada plano (Diamond, Gold, Silver, sexta, sábado, domingo, Guest) | *Olá! Quero garantir minha vaga no plano [nome do plano] do Camp BJJ'S HOUSE (10 a 13/12).* |
+| Botões de cada plano (Diamante, Ouro, Prata, Bronze, Day Pass Full, Day Pass Half, Acompanhantes) | *Olá! Quero garantir minha vaga no [nome do plano] do Camp BJJ'S HOUSE (10 a 13/12).* |
 | Fale conosco / botão verde flutuante | `mensagemWhatsapp` do `config.js` |
 
 Para mudar uma mensagem, edite o atributo `data-wa-msg` do botão no `index.html`
 (as dos planos ficam em `assets/js/main.js`). Continuam funcionando normalmente, de propósito:
 os itens do menu, as fotos da galeria, os controles (abrir menu, ampliar foto, perguntas,
-comparar planos, voltar ao topo), o preço da barra fixa do celular ("Camp a partir de R$ 1.200", que leva
+comparar planos, voltar ao topo), o preço da barra fixa do celular ("Camp a partir de R$ 2.000", que leva
 aos valores) e o botão **Abrir no Google Maps** do rodapé (é o "como chegar").
 
 **Se um dia quiser usar links de pagamento**, mude para `botoesParaWhatsapp: false` e preencha `checkout`:
@@ -158,7 +158,7 @@ Isso garante que a imagem de compartilhamento apareça corretamente no WhatsApp 
 
 - **Fotos**: substitua os arquivos em `assets/img/` mantendo o mesmo nome
   (formato `.webp` recomendado, até ~300 KB cada). A casa: `hero-casa.webp` (topo e galeria) e
-  `casa-1` a `casa-5.webp` (galeria). O Diamond usa uma montagem com as fotos dos mestres:
+  `casa-1` a `casa-5.webp` (galeria). O Plano Diamante usa uma montagem com as fotos dos mestres:
   `diamond.webp` (um acima do outro, no computador) e `diamond-m.webp` (lado a lado, no celular e tablet).
 - **Textos e preços**: estão direto no `index.html`, organizados por seção
   (procure pelos comentários `<!-- ===== NOME DA SEÇÃO ===== -->`).

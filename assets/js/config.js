@@ -28,13 +28,13 @@ window.BJJ_CONFIG = {
      Só são usados quando botoesParaWhatsapp for false. Se um link ficar vazio,
      o botão abre o WhatsApp com a mensagem do plano já escrita. */
   checkout: {
-    diamond: "",
-    gold: "",
-    silver: "",
-    sexta: "",
-    sabado: "",
-    domingo: "",
-    guest: ""
+    diamante: "",
+    ouro: "",
+    prata: "",
+    bronze: "",
+    dayfull: "",
+    dayhalf: "",
+    acompanhantes: ""
   },
 
   /* Texto de parcelamento exibido abaixo dos preços. Ex.: "em até 12x no cartão".
@@ -44,9 +44,10 @@ window.BJJ_CONFIG = {
   /* Vagas restantes por plano (número). Quando preenchido, aparece
      "Restam X vagas" com barra de progresso. Use null para ocultar. */
   vagasRestantes: {
-    diamond: null,  // total: 4
-    gold: null,
-    silver: null
+    diamante: null,  // total: 2
+    ouro: null,
+    prata: null,
+    bronze: null
   },
 
   /* Endereço completo (opcional). Atualiza o rodapé e o mapa. */
