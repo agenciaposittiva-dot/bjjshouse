@@ -17,13 +17,13 @@
   const vh = () => window.innerHeight;
 
   const PLANOS = {
-    diamond: { nome: "Diamond Experience", valor: 15000 },
-    gold:    { nome: "Gold Immersion", valor: 5000 },
-    silver:  { nome: "Silver Immersion", valor: 4600 },
-    sexta:   { nome: "Day Experience · sexta (11/12)", valor: 1200 },
-    sabado:  { nome: "Day Experience · sábado (12/12)", valor: 1600 },
-    domingo: { nome: "Day Experience · domingo (13/12)", valor: 1400 },
-    guest:   { nome: "BJJ'S HOUSE Guest", valor: 500 }
+    diamante:      { nome: "Plano Diamante", valor: 20000 },
+    ouro:          { nome: "Plano Ouro", valor: 16000 },
+    prata:         { nome: "Plano Prata", valor: 11000 },
+    bronze:        { nome: "Plano Bronze", valor: 10000 },
+    dayfull:       { nome: "Day Pass Full", valor: 4000 },
+    dayhalf:       { nome: "Day Pass Half", valor: 2000 },
+    acompanhantes: { nome: "Acompanhantes", valor: 500, ref: "no plano Acompanhantes" }
   };
 
   /* =================================================================
@@ -81,7 +81,7 @@
   $$("[data-buy]").forEach((a) => {
     const k = a.getAttribute("data-buy");
     const plano = PLANOS[k] || { nome: k, valor: 0 };
-    const waPlano = waLink("Olá! Quero garantir minha vaga no plano " + plano.nome + " do Camp BJJ'S HOUSE (10 a 13/12).");
+    const waPlano = waLink("Olá! Quero garantir minha vaga " + (plano.ref || "no " + plano.nome) + " do Camp BJJ'S HOUSE (10 a 13/12).");
     let link = allToWa ? waPlano : (checkout[k] ? withTracking(checkout[k]) : waPlano);
     if (!link && CFG.email) {
       link = "mailto:" + CFG.email + "?subject=" + encodeURIComponent("Inscrição · " + plano.nome + " · BJJ'S HOUSE");

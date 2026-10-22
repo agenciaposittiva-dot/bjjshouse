@@ -327,6 +327,9 @@ section{padding-block:120px;position:relative}
 .mstats{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-dk)}
 .mstats li{padding:20px 12px 0 0;min-width:0}
 .mstats li+li{border-left:1px solid var(--line-dk);padding-left:16px}
+.mstats{row-gap:24px}
+.mstats li:nth-child(3n+4){border-left:0;padding-left:0}
+#mestres .sec-sub{margin:22px 0 0;color:var(--gold);font-size:clamp(19px,1.9vw,23px);line-height:1.35}
 .mstats b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(44px,4.6vw,60px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
 .mstats small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.78;line-height:1.45;margin-top:8px}
 .closing{max-width:860px;margin:80px auto 0;text-align:center;font-size:17px;opacity:.88}
@@ -487,6 +490,28 @@ blockquote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
 .daypass .price-row:last-child{border-bottom:0;padding-bottom:0}
 .daypass .price strong{font-size:36px}
 .daypass .btn{min-width:210px}
+/* planos em 3 colunas: camp completo / day pass e acompanhantes */
+.planos-3 + .others{margin-top:64px}
+@media (min-width:761px){
+  .planos-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .planos-3 .plano{padding:36px 30px}
+  .planos-3 .plano h3{font-size:40px}
+  .planos-3 .plano .price strong{font-size:46px}
+  .planos-3 .plano>.price-row .btn{flex:1 1 100%}
+}
+@media (min-width:761px) and (max-width:1000px){
+  .planos-3{gap:14px}
+  .planos-3 .plano{padding:28px 20px}
+  .planos-3 .plano h3{font-size:31px}
+  .planos-3 .plano .price strong{font-size:38px}
+  .planos-3 .p-tag{font-size:9.5px;letter-spacing:.1em}
+}
+.compare .t-7{min-width:940px}
+.compare .t-7 tbody th{width:20%}
+.compare .t-7 thead th{white-space:nowrap;font-size:22px}
+.compare .t-7 .tr-price td{white-space:nowrap;font-size:22px}
+.compare .t-7 .tr-price small{white-space:normal}
+.compare .tr-price small{display:block;font-family:var(--f-body);font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.65;margin-top:4px}
 
 .compare{margin-top:44px;border:1px solid var(--line-lt);background:var(--paper)}
 .compare summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;transition:background .3s}
