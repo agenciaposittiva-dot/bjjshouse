@@ -322,6 +322,9 @@ section{padding-block:120px;position:relative}
 .mstats{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-dk)}
 .mstats li{padding:20px 12px 0 0;min-width:0}
 .mstats li+li{border-left:1px solid var(--line-dk);padding-left:16px}
+.mstats{row-gap:24px}
+.mstats li:nth-child(3n+4){border-left:0;padding-left:0}
+#mestres .sec-sub{margin:22px 0 0;color:var(--gold);font-size:clamp(19px,1.9vw,23px);line-height:1.35}
 .mstats b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(44px,4.6vw,60px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
 .mstats small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.78;line-height:1.45;margin-top:8px}
 .closing{max-width:860px;margin:80px auto 0;text-align:center;font-size:17px;opacity:.88}
